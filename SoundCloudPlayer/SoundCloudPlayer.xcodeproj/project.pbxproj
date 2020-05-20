@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29DD5E59F7BC9B9BDCABFCD7 /* Pods_SoundCloudPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D12358D2469541A74D41CA /* Pods_SoundCloudPlayer.framework */; };
 		BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB32475AB050029C718 /* AppDelegate.swift */; };
 		BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB52475AB050029C718 /* SceneDelegate.swift */; };
 		BA968CB82475AB050029C718 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB72475AB050029C718 /* ViewController.swift */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		219AB31CCA4D335B0AC75A37 /* Pods-SoundCloudPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloudPlayer.release.xcconfig"; path = "Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		57F52C2CABC64E4FF4772E20 /* Pods-SoundCloudPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloudPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		65D12358D2469541A74D41CA /* Pods_SoundCloudPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCloudPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA968CB02475AB050029C718 /* Cloud Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cloud Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA968CB32475AB050029C718 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA968CB52475AB050029C718 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +35,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29DD5E59F7BC9B9BDCABFCD7 /* Pods_SoundCloudPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76F17E6AEA28812FDEAD0E45 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57F52C2CABC64E4FF4772E20 /* Pods-SoundCloudPlayer.debug.xcconfig */,
+				219AB31CCA4D335B0AC75A37 /* Pods-SoundCloudPlayer.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A004DCE4C90744694099740F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				65D12358D2469541A74D41CA /* Pods_SoundCloudPlayer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BA968CA72475AB050029C718 = {
 			isa = PBXGroup;
 			children = (
 				BA968CB22475AB050029C718 /* SoundCloudPlayer */,
 				BA968CB12475AB050029C718 /* Products */,
+				76F17E6AEA28812FDEAD0E45 /* Pods */,
+				A004DCE4C90744694099740F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,6 +99,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA968CC42475AB070029C718 /* Build configuration list for PBXNativeTarget "SoundCloudPlayer" */;
 			buildPhases = (
+				7116403A48176F5B97DF56A4 /* [CP] Check Pods Manifest.lock */,
 				BA968CAC2475AB050029C718 /* Sources */,
 				BA968CAD2475AB050029C718 /* Frameworks */,
 				BA968CAE2475AB050029C718 /* Resources */,
@@ -132,6 +158,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7116403A48176F5B97DF56A4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SoundCloudPlayer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BA968CAC2475AB050029C718 /* Sources */ = {
@@ -282,6 +333,7 @@
 		};
 		BA968CC52475AB070029C718 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57F52C2CABC64E4FF4772E20 /* Pods-SoundCloudPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -300,6 +352,7 @@
 		};
 		BA968CC62475AB070029C718 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 219AB31CCA4D335B0AC75A37 /* Pods-SoundCloudPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
