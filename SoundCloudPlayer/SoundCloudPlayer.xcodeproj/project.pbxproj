@@ -14,6 +14,10 @@
 		BA968CBB2475AB050029C718 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA968CB92475AB050029C718 /* Login.storyboard */; };
 		BA968CBD2475AB070029C718 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA968CBC2475AB070029C718 /* Assets.xcassets */; };
 		BA968CC02475AB070029C718 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA968CBE2475AB070029C718 /* LaunchScreen.storyboard */; };
+		BA968CCC2475D40C0029C718 /* LoginProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CCB2475D40C0029C718 /* LoginProtocols.swift */; };
+		BA968CCE2475DB920029C718 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CCD2475DB920029C718 /* LoginPresenter.swift */; };
+		BA968CD02475DBE40029C718 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CCF2475DBE40029C718 /* LoginRouter.swift */; };
+		BA968CD22475DD710029C718 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CD12475DD710029C718 /* LoginInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		BA968CBC2475AB070029C718 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA968CBF2475AB070029C718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA968CC12475AB070029C718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA968CCB2475D40C0029C718 /* LoginProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocols.swift; sourceTree = "<group>"; };
+		BA968CCD2475DB920029C718 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		BA968CCF2475DBE40029C718 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		BA968CD12475DD710029C718 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,10 @@
 			isa = PBXGroup;
 			children = (
 				BA968CB72475AB050029C718 /* LoginView.swift */,
+				BA968CCB2475D40C0029C718 /* LoginProtocols.swift */,
+				BA968CCD2475DB920029C718 /* LoginPresenter.swift */,
+				BA968CCF2475DBE40029C718 /* LoginRouter.swift */,
+				BA968CD12475DD710029C718 /* LoginInteractor.swift */,
 				BA968CB92475AB050029C718 /* Login.storyboard */,
 			);
 			path = Login;
@@ -231,8 +243,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA968CB82475AB050029C718 /* LoginView.swift in Sources */,
+				BA968CCC2475D40C0029C718 /* LoginProtocols.swift in Sources */,
+				BA968CD22475DD710029C718 /* LoginInteractor.swift in Sources */,
+				BA968CD02475DBE40029C718 /* LoginRouter.swift in Sources */,
 				BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */,
 				BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */,
+				BA968CCE2475DB920029C718 /* LoginPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

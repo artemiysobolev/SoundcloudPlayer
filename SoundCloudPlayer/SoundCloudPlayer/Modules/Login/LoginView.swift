@@ -8,6 +8,7 @@ import UIKit
 class LoginView: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    var presenter: LoginPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,5 +18,6 @@ class LoginView: UIViewController {
     @IBAction func signInButtonTapped(_ sender: UIButton) {
     }
     @IBAction func signUpButtonTapped(_ sender: UIButton) {
+        //reference to soundcloud.
     }
 }
