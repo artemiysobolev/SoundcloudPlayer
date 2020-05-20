@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Login View-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginView" customModule="Cloud_Music" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="tkP-Vf-ESf">
+                                <rect key="frame" x="20" y="124" width="335" height="608"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soundcloudLogo" translatesAutoresizingMaskIntoConstraints="NO" id="cLe-Pp-var">
+                                        <rect key="frame" x="72" y="0.0" width="191" height="105.66666666666667"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="cLe-Pp-var" secondAttribute="height" multiplier="38:21" id="QUN-DF-Jwq"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="cjt-LH-3yo">
+                                        <rect key="frame" x="29.333333333333343" y="262.66666666666669" width="276.33333333333326" height="68"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="gKl-gm-2Kz">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="68"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="v9U-3l-adj">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="gV1-am-V81"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                        <color key="textColor" name="CustomLabelColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PASSWORD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r3F-RK-kxT">
+                                                        <rect key="frame" x="0.0" y="43" width="100" height="25"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="wyq-My-fWt"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                        <color key="textColor" name="CustomLabelColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="r3F-RK-kxT" secondAttribute="trailing" id="FLv-AP-DA5"/>
+                                                    <constraint firstItem="v9U-3l-adj" firstAttribute="leading" secondItem="gKl-gm-2Kz" secondAttribute="leading" id="Shf-nl-vqo"/>
+                                                    <constraint firstAttribute="trailing" secondItem="v9U-3l-adj" secondAttribute="trailing" id="bsl-RI-Rln"/>
+                                                    <constraint firstItem="r3F-RK-kxT" firstAttribute="leading" secondItem="gKl-gm-2Kz" secondAttribute="leading" id="hSz-2d-mos"/>
+                                                    <constraint firstAttribute="width" constant="100" id="lOe-MO-eCr"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="ASc-cj-lc5">
+                                                <rect key="frame" x="125.00000000000001" y="0.0" width="151.33333333333337" height="68"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your email address" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="YqL-zX-wIh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="151.33333333333334" height="25"/>
+                                                        <color key="tintColor" name="SoundcloudOrange"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="gLr-qL-unK"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your password" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="l4Z-gI-xt8">
+                                                        <rect key="frame" x="0.0" y="43" width="151.33333333333334" height="25"/>
+                                                        <color key="tintColor" name="SoundcloudOrange"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="yoW-EF-iEl"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    </textField>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="YqL-zX-wIh" secondAttribute="trailing" id="BZm-2e-Ly9"/>
+                                                    <constraint firstItem="YqL-zX-wIh" firstAttribute="leading" secondItem="ASc-cj-lc5" secondAttribute="leading" id="DTm-RX-gOU"/>
+                                                    <constraint firstItem="l4Z-gI-xt8" firstAttribute="width" secondItem="YqL-zX-wIh" secondAttribute="width" id="fNi-MO-8go"/>
+                                                    <constraint firstAttribute="trailing" secondItem="l4Z-gI-xt8" secondAttribute="trailing" id="wve-NP-5td"/>
+                                                    <constraint firstItem="l4Z-gI-xt8" firstAttribute="leading" secondItem="ASc-cj-lc5" secondAttribute="leading" id="xne-Hf-bfK"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qxP-eE-bj3">
+                                        <rect key="frame" x="97.666666666666686" y="488" width="140" height="120"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HZe-An-dYE">
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="50"/>
+                                                <color key="backgroundColor" name="SoundcloudOrange"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="25"/>
+                                                <state key="normal" title="Sign in">
+                                                    <color key="titleColor" name="CustomBackgroundColor"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="signInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yjy-mG-IPY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PU7-10-ceV">
+                                                <rect key="frame" x="0.0" y="70" width="140" height="50"/>
+                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="24"/>
+                                                <state key="normal" title="Sign up">
+                                                    <color key="titleColor" name="SoundcloudOrange"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vfa-d2-hnc"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="HZe-An-dYE" firstAttribute="leading" secondItem="qxP-eE-bj3" secondAttribute="leading" id="6NV-2E-8Zv"/>
+                                            <constraint firstAttribute="trailing" secondItem="PU7-10-ceV" secondAttribute="trailing" id="BS2-TC-pV5"/>
+                                            <constraint firstItem="PU7-10-ceV" firstAttribute="leading" secondItem="qxP-eE-bj3" secondAttribute="leading" id="j5h-os-hhH"/>
+                                            <constraint firstItem="PU7-10-ceV" firstAttribute="height" secondItem="HZe-An-dYE" secondAttribute="height" id="oLu-eu-MHF"/>
+                                            <constraint firstAttribute="trailing" secondItem="HZe-An-dYE" secondAttribute="trailing" id="rzL-iR-IB8"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="cjt-LH-3yo" firstAttribute="centerX" secondItem="tkP-Vf-ESf" secondAttribute="centerX" id="bEF-Bx-k1F"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="CustomBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cLe-Pp-var" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.13" id="3Ev-8X-W5S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tkP-Vf-ESf" secondAttribute="trailing" constant="20" id="4Cj-y0-C5T"/>
+                            <constraint firstItem="tkP-Vf-ESf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Qe4-04-7uZ"/>
+                            <constraint firstAttribute="bottom" secondItem="tkP-Vf-ESf" secondAttribute="bottom" constant="80" id="hRJ-Br-RnX"/>
+                            <constraint firstItem="HZe-An-dYE" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.0615764" id="iD7-9U-fm2"/>
+                            <constraint firstItem="qxP-eE-bj3" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.373333" id="nGe-1V-vFU"/>
+                            <constraint firstItem="tkP-Vf-ESf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="vEf-Mz-gdO"/>
+                            <constraint firstItem="YqL-zX-wIh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.403556" id="yJG-9c-Qu8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="YqL-zX-wIh" id="bUZ-0f-AFK"/>
+                        <outlet property="passwordTextField" destination="l4Z-gI-xt8" id="DQw-pC-1eZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="110.49107142857143"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="soundcloudLogo" width="93" height="54"/>
+        <namedColor name="CustomBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CustomLabelColor">
+            <color red="0.56999999284744263" green="0.56999999284744263" blue="0.56999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SoundcloudOrange">
+            <color red="0.97299998998641968" green="0.35699999332427979" blue="0.059000000357627869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -10,8 +10,8 @@
 		29DD5E59F7BC9B9BDCABFCD7 /* Pods_SoundCloudPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D12358D2469541A74D41CA /* Pods_SoundCloudPlayer.framework */; };
 		BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB32475AB050029C718 /* AppDelegate.swift */; };
 		BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB52475AB050029C718 /* SceneDelegate.swift */; };
-		BA968CB82475AB050029C718 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB72475AB050029C718 /* ViewController.swift */; };
-		BA968CBB2475AB050029C718 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA968CB92475AB050029C718 /* Main.storyboard */; };
+		BA968CB82475AB050029C718 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB72475AB050029C718 /* LoginView.swift */; };
+		BA968CBB2475AB050029C718 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA968CB92475AB050029C718 /* Login.storyboard */; };
 		BA968CBD2475AB070029C718 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA968CBC2475AB070029C718 /* Assets.xcassets */; };
 		BA968CC02475AB070029C718 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA968CBE2475AB070029C718 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -23,8 +23,8 @@
 		BA968CB02475AB050029C718 /* Cloud Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cloud Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA968CB32475AB050029C718 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA968CB52475AB050029C718 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BA968CB72475AB050029C718 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BA968CBA2475AB050029C718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BA968CB72475AB050029C718 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BA968CBA2475AB050029C718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Login.storyboard; sourceTree = "<group>"; };
 		BA968CBC2475AB070029C718 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA968CBF2475AB070029C718 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA968CC12475AB070029C718 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,15 +80,39 @@
 		BA968CB22475AB050029C718 /* SoundCloudPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				BA968CC92475B7620029C718 /* Modules */,
+				BA968CC82475B6990029C718 /* Supporting files */,
+			);
+			path = SoundCloudPlayer;
+			sourceTree = "<group>";
+		};
+		BA968CC82475B6990029C718 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
 				BA968CB32475AB050029C718 /* AppDelegate.swift */,
 				BA968CB52475AB050029C718 /* SceneDelegate.swift */,
-				BA968CB72475AB050029C718 /* ViewController.swift */,
-				BA968CB92475AB050029C718 /* Main.storyboard */,
 				BA968CBC2475AB070029C718 /* Assets.xcassets */,
 				BA968CBE2475AB070029C718 /* LaunchScreen.storyboard */,
 				BA968CC12475AB070029C718 /* Info.plist */,
 			);
-			path = SoundCloudPlayer;
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		BA968CC92475B7620029C718 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				BA968CCA2475B7680029C718 /* Login */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		BA968CCA2475B7680029C718 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BA968CB72475AB050029C718 /* LoginView.swift */,
+				BA968CB92475AB050029C718 /* Login.storyboard */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,7 +177,7 @@
 			files = (
 				BA968CC02475AB070029C718 /* LaunchScreen.storyboard in Resources */,
 				BA968CBD2475AB070029C718 /* Assets.xcassets in Resources */,
-				BA968CBB2475AB050029C718 /* Main.storyboard in Resources */,
+				BA968CBB2475AB050029C718 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA968CB82475AB050029C718 /* ViewController.swift in Sources */,
+				BA968CB82475AB050029C718 /* LoginView.swift in Sources */,
 				BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */,
 				BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */,
 			);
@@ -215,12 +239,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BA968CB92475AB050029C718 /* Main.storyboard */ = {
+		BA968CB92475AB050029C718 /* Login.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				BA968CBA2475AB050029C718 /* Base */,
 			);
-			name = Main.storyboard;
+			name = Login.storyboard;
 			sourceTree = "<group>";
 		};
 		BA968CBE2475AB070029C718 /* LaunchScreen.storyboard */ = {
@@ -355,12 +379,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 62KXKW7DBU;
-				INFOPLIST_FILE = SoundCloudPlayer/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SoundCloudPlayer/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.artemiy.SoundCloudPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artemiy.SoundcloudPlayer;
 				PRODUCT_NAME = "Cloud Music";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -374,12 +398,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 62KXKW7DBU;
-				INFOPLIST_FILE = SoundCloudPlayer/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SoundCloudPlayer/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.artemiy.SoundCloudPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.artemiy.SoundcloudPlayer;
 				PRODUCT_NAME = "Cloud Music";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
