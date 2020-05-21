@@ -4,20 +4,29 @@
 //
 
 import UIKit
+import SafariServices
+import AuthenticationServices
 
 class LoginView: UIViewController {
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     var presenter: LoginPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        loginButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        imageView.image = UIImage(named: "soundcloudLogo")
     }
 
-    @IBAction func signInButtonTapped(_ sender: UIButton) {
+    @IBAction func loginButtonTapped(_ sender: UIButton) {
+        presenter?.login()
     }
-    @IBAction func signUpButtonTapped(_ sender: UIButton) {
-        //reference to soundcloud.
+    
+}
+
+extension LoginView: LoginViewProtocol {
+    func showSafariAuth(with url: URL) {
+        let svc = SFSafariViewController(url: url)
+        present(svc, animated: true, completion: nil)
     }
 }

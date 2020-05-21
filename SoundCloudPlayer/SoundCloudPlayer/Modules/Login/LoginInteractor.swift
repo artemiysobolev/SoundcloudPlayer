@@ -5,7 +5,12 @@
 
 import Foundation
 
-class LoginInteractor: LoginInteractorInputProtocol {
+class LoginInteractor: LoginInteractorInputProtocol {    
     weak var presenter: LoginInteractorOutputProtocol?
-    var networkManager: LoginNetworkManagerInputProtocol?
+    var networkService: LoginNetworkServiceInputProtocol?
+    
+    func createLoginUrl() {
+        guard let url = networkService?.createOauthUrl() else { return }
+        presenter?.didRecieveLoginUrl(url: url)
+    }
 }

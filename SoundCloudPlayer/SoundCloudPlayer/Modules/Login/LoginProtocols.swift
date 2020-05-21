@@ -3,10 +3,13 @@
 // 	SoundCloudPlayer
 //
 
-import Foundation
+import UIKit
 
 protocol LoginViewProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
+    
+    //Presenter -> View
+    func showSafariAuth(with url: URL)
 }
 
 protocol LoginPresenterProtocol: class {
@@ -15,26 +18,29 @@ protocol LoginPresenterProtocol: class {
     var router: LoginRouterProtocol? { get set }
     
     // View -> Presenter
-    func signIn(email: String, password: String)
-    func signUp()
+    func login()
 }
 
 protocol LoginRouterProtocol: class {
-    static func createLoginModule()
+    static func createLoginModule() -> UIViewController
+    
     //Presenter -> Router
 }
 
 protocol LoginInteractorOutputProtocol: class {
-    // Presenter -> Interactor
+    // Interactor -> Presenter
+    func didRecieveLoginUrl(url: URL)
 }
 
 protocol LoginInteractorInputProtocol: class {
     var presenter: LoginInteractorOutputProtocol? { get set }
-    var networkManager: LoginNetworkManagerInputProtocol? { get set }
+    var networkService: LoginNetworkServiceInputProtocol? { get set }
     
-    // Interactor -> Presenter
+    // Presenter -> Interactor
+    func createLoginUrl()
 }
 
-protocol LoginNetworkManagerInputProtocol: class {
+protocol LoginNetworkServiceInputProtocol: class {
     // Interactor -> Network Manager
+    func createOauthUrl() -> URL
 }
