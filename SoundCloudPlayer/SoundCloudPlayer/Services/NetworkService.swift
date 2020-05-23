@@ -8,6 +8,23 @@ import Alamofire
 
 class NetworkService: LoginNetworkServiceInputProtocol {
     
+    static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool) -> Void) {
+        guard let token = token else { return }
+        let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
+        
+        AF.request(SoundcloudAPIData.meUrlString, method: .get, headers: [header])
+            .validate(statusCode: [200])
+            .responseJSON { response in
+                
+                switch response.result {
+                case .success:
+                    completionHandler(true)
+                case .failure:
+                    completionHandler(false)
+                }
+        }
+    }
+    
     func sendOAuthRequest(email: String,
                           password: String,
                           completionHandler: @escaping (_ token: String?, _ error: String?) -> Void) {
@@ -30,7 +47,7 @@ class NetworkService: LoginNetworkServiceInputProtocol {
                     guard let jsonResponse = value as? [String: Any],
                         let token = jsonResponse["access_token"] as? String else {
                             completionHandler(nil, "Incorrect response from server")
-                        return
+                            return
                     }
                     completionHandler(token, nil)
                 case .failure(let error):

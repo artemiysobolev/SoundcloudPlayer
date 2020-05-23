@@ -17,11 +17,15 @@ class LoginPresenter: LoginPresenterProtocol {
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
     func loginAttemptDidFail(errorMessage: String) {
-        view?.showAlertController(title: "Login error", message: errorMessage)
+        presentAlert(title: "Login error", message: errorMessage)
     }
     
     func loginAttemptSuccess() {
-        view?.showAlertController(title: "Success", message: "You are get a token!")
+        router?.presentMainScreen(from: view)
+    }
+    
+    func presentAlert(title: String, message: String) {
+        view?.showAlertController(title: title, message: message)
     }
     
 }

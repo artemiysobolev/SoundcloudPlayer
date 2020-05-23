@@ -25,5 +25,13 @@ class LoginRouter: LoginRouterProtocol {
         
         return view
     }
-
+    
+    func presentMainScreen(from view: LoginViewProtocol?) {
+        guard let sourceView = view as? UIViewController,
+            let mainScreenView = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() else {
+                return
+        }
+        sourceView.modalPresentationStyle = .fullScreen
+        sourceView.present(mainScreenView, animated: true, completion: nil)
+    }
 }
