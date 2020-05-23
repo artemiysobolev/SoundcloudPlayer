@@ -10,6 +10,8 @@ import AuthenticationServices
 class LoginView: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
     var presenter: LoginPresenterProtocol?
     
     override func viewDidLoad() {
@@ -19,14 +21,18 @@ class LoginView: UIViewController {
     }
 
     @IBAction func loginButtonTapped(_ sender: UIButton) {
-        presenter?.login()
+        presenter?.sendLoginData(email: emailTextField.text, password: passwordTextField.text)
     }
     
 }
 
 extension LoginView: LoginViewProtocol {
-    func showSafariAuth(with url: URL) {
-        let svc = SFSafariViewController(url: url)
-        present(svc, animated: true, completion: nil)
+    func showAlertController(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        okAction.setValue(UIColor(named: "SoundcloudOrange"), forKey: "titleTextColor")
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
+    
 }

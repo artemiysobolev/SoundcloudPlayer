@@ -10,13 +10,18 @@ class LoginPresenter: LoginPresenterProtocol {
     var interactor: LoginInteractorInputProtocol?
     var router: LoginRouterProtocol?
     
-    func login() {
-        interactor?.createLoginUrl()
+    func sendLoginData(email: String?, password: String?) {
+        interactor?.loginAttempt(email: email, password: password)
     }
 }
 
 extension LoginPresenter: LoginInteractorOutputProtocol {
-    func didRecieveLoginUrl(url: URL) {
-        view?.showSafariAuth(with: url)
+    func loginAttemptDidFail(errorMessage: String) {
+        view?.showAlertController(title: "Login error", message: errorMessage)
     }
+    
+    func loginAttemptSuccess() {
+        view?.showAlertController(title: "Success", message: "You are get a token!")
+    }
+    
 }

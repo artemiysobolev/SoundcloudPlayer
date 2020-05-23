@@ -4,12 +4,13 @@
 //
 
 import UIKit
+import Alamofire
 
 protocol LoginViewProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
     
     //Presenter -> View
-    func showSafariAuth(with url: URL)
+    func showAlertController(title: String, message: String)
 }
 
 protocol LoginPresenterProtocol: class {
@@ -18,7 +19,7 @@ protocol LoginPresenterProtocol: class {
     var router: LoginRouterProtocol? { get set }
     
     // View -> Presenter
-    func login()
+    func sendLoginData(email: String?, password: String?)
 }
 
 protocol LoginRouterProtocol: class {
@@ -27,20 +28,21 @@ protocol LoginRouterProtocol: class {
     //Presenter -> Router
 }
 
-protocol LoginInteractorOutputProtocol: class {
-    // Interactor -> Presenter
-    func didRecieveLoginUrl(url: URL)
-}
-
 protocol LoginInteractorInputProtocol: class {
     var presenter: LoginInteractorOutputProtocol? { get set }
     var networkService: LoginNetworkServiceInputProtocol? { get set }
     
     // Presenter -> Interactor
-    func createLoginUrl()
+    func loginAttempt(email: String?, password: String?)
+}
+
+protocol LoginInteractorOutputProtocol: class {
+    // Interactor -> Presenter
+    func loginAttemptDidFail(errorMessage: String)
+    func loginAttemptSuccess()
 }
 
 protocol LoginNetworkServiceInputProtocol: class {
     // Interactor -> Network Manager
-    func createOauthUrl() -> URL
+    func sendOAuthRequest(email: String, password: String, completionHandler: @escaping(String?, String?) -> Void)
 }

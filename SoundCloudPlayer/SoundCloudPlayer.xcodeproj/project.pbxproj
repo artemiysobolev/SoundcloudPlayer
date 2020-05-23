@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,7 @@
 		BA968CD22475DD710029C718 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CD12475DD710029C718 /* LoginInteractor.swift */; };
 		BA968CD4247666F90029C718 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CD3247666F90029C718 /* NetworkService.swift */; };
 		BAE6BF722476C03A0078925A /* SoundcloudAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */; };
+		BAF509F3247936C8001B87CA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF509F2247936C8001B87CA /* String+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		BA968CD12475DD710029C718 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		BA968CD3247666F90029C718 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudAPIData.swift; sourceTree = "<group>"; };
+		BAF509F2247936C8001B87CA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		BA968CB22475AB050029C718 /* SoundCloudPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				BAF509F1247936B5001B87CA /* Extensions */,
 				BA968CC92475B7620029C718 /* Modules */,
 				BA968CC82475B6990029C718 /* Supporting files */,
 			);
@@ -131,6 +134,14 @@
 				BA968CB92475AB050029C718 /* Login.storyboard */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		BAF509F1247936B5001B87CA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BAF509F2247936C8001B87CA /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +285,7 @@
 				BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */,
 				BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */,
 				BA968CCE2475DB920029C718 /* LoginPresenter.swift in Sources */,
+				BAF509F3247936C8001B87CA /* String+Extension.swift in Sources */,
 				BAE6BF722476C03A0078925A /* SoundcloudAPIData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
