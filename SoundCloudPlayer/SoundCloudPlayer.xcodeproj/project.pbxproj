@@ -140,11 +140,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA968CC42475AB070029C718 /* Build configuration list for PBXNativeTarget "SoundCloudPlayer" */;
 			buildPhases = (
-				BA968CC72475ACBC0029C718 /* ShellScript */,
 				7116403A48176F5B97DF56A4 /* [CP] Check Pods Manifest.lock */,
+				BA968CC72475ACBC0029C718 /* ShellScript */,
 				BA968CAC2475AB050029C718 /* Sources */,
 				BA968CAD2475AB050029C718 /* Frameworks */,
 				BA968CAE2475AB050029C718 /* Resources */,
+				D3E753938297F76435A433C8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -240,6 +241,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
+		};
+		D3E753938297F76435A433C8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -7,5 +7,6 @@ target 'SoundCloudPlayer' do
 
   # Pods for SoundCloudPlayer
   pod 'SwiftLint'
+  pod 'Alamofire', '~> 5.2'
 
 end
