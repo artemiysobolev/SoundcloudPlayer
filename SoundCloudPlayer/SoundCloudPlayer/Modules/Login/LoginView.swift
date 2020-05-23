@@ -50,6 +50,7 @@ extension LoginView: LoginViewProtocol {
 extension LoginView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        loginButtonTapped(loginButton)
         return true
     }
 }
