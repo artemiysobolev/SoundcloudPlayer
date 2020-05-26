@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import SafariServices
 
 class LoginRouter: LoginRouterProtocol {
     static func createLoginModule() -> UIViewController {
@@ -26,12 +25,14 @@ class LoginRouter: LoginRouterProtocol {
         return view
     }
     
-    func presentMainScreen(from view: LoginViewProtocol?) {
+    func presentMainScreen(from view: LoginViewProtocol?, token: String) {
         guard let sourceView = view as? UIViewController,
-            let mainScreenView = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() else {
+            let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as? MainViewController else {
                 return
         }
+
+        mainVC.token = token
         sourceView.modalPresentationStyle = .fullScreen
-        sourceView.present(mainScreenView, animated: true, completion: nil)
+        sourceView.present(mainVC, animated: true, completion: nil)
     }
 }

@@ -15,19 +15,21 @@ class LoginInteractor: LoginInteractorInputProtocol {
                 presenter?.presentAlert(title: "Empty fields", message: "Enter email and password and try again")
                 return
         }
-                
+        
         networkService?.sendOAuthRequest(email: email.trimmingCharacters(in: .whitespacesAndNewlines),
                                          password: password.trimmingCharacters(in: .whitespacesAndNewlines),
                                          completionHandler: { [weak self] token, error  in
                                             
                                             guard let self = self else { return }
-                                            guard let token = token,
-                                                error == nil else {
-                                                    self.presenter?.loginAttemptDidFail(errorMessage: error!)
-                                                    return
+                                            DispatchQueue.main.async {
+                                                guard let token = token,
+                                                    error == nil else {
+                                                        self.presenter?.loginAttemptDidFail(errorMessage: error!)
+                                                        return
+                                                }
+                                                self.saveAccessToken(token: token)
+                                                self.presenter?.loginAttemptSuccess(token: token)
                                             }
-                                            self.saveAccessToken(token: token)
-                                            self.presenter?.loginAttemptSuccess()
         })
     }
     

@@ -20,8 +20,8 @@ extension LoginPresenter: LoginInteractorOutputProtocol {
         presentAlert(title: "Login error", message: errorMessage)
     }
     
-    func loginAttemptSuccess() {
-        router?.presentMainScreen(from: view)
+    func loginAttemptSuccess(token: String) {
+        router?.presentMainScreen(from: view, token: token)
     }
     
     func presentAlert(title: String, message: String) {

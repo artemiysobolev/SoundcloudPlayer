@@ -14,6 +14,7 @@
 		BA018194247D776C007AFB9F /* TrackListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA018193247D776C007AFB9F /* TrackListPresenter.swift */; };
 		BA018196247D7976007AFB9F /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA018195247D7976007AFB9F /* TrackListTableViewCell.swift */; };
 		BA01819C247D9C9C007AFB9F /* TrackListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01819B247D9C9C007AFB9F /* TrackListProtocols.swift */; };
+		BA01819E247DB690007AFB9F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01819D247DB690007AFB9F /* MainViewController.swift */; };
 		BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB32475AB050029C718 /* AppDelegate.swift */; };
 		BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB52475AB050029C718 /* SceneDelegate.swift */; };
 		BA968CB82475AB050029C718 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB72475AB050029C718 /* LoginView.swift */; };
@@ -42,6 +43,7 @@
 		BA018193247D776C007AFB9F /* TrackListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListPresenter.swift; sourceTree = "<group>"; };
 		BA018195247D7976007AFB9F /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
 		BA01819B247D9C9C007AFB9F /* TrackListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListProtocols.swift; sourceTree = "<group>"; };
+		BA01819D247DB690007AFB9F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BA968CB02475AB050029C718 /* Cloud Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cloud Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA968CB32475AB050029C718 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA968CB52475AB050029C718 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				BA01818B247D72FB007AFB9F /* Tracks */,
 				BA968CCA2475B7680029C718 /* Login */,
+				BA01819D247DB690007AFB9F /* MainViewController.swift */,
 				BAF509F424795B05001B87CA /* Main.storyboard */,
 			);
 			path = Modules;
@@ -337,6 +340,7 @@
 				BA01819C247D9C9C007AFB9F /* TrackListProtocols.swift in Sources */,
 				BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */,
 				BA968CCE2475DB920029C718 /* LoginPresenter.swift in Sources */,
+				BA01819E247DB690007AFB9F /* MainViewController.swift in Sources */,
 				BAF509F3247936C8001B87CA /* String+Extension.swift in Sources */,
 				BAE6BF722476C03A0078925A /* SoundcloudAPIData.swift in Sources */,
 			);

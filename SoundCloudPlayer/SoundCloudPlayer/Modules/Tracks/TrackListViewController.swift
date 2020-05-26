@@ -7,12 +7,17 @@ import UIKit
 
 class TrackListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    weak private var trackListView: TrackListView?
+    weak private var trackListView: TrackListViewProtocol?
     var trackList: [TrackViewData] = []
-    let trackListPresenter = TrackListPresenter(networkService: NetworkService())
+    var presenter: TrackListPresenterProtocol?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        presenter?.getTrackList()
+    }
 }
 
-extension TrackListViewController: TrackListView {
+extension TrackListViewController: TrackListViewProtocol {
     func setTrackList(trackList: [TrackViewData]) {
         self.trackList = trackList
         tableView.reloadData()

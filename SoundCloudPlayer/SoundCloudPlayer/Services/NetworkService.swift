@@ -8,7 +8,7 @@ import Alamofire
 
 class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceProtocol {
     
-    static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool, String?) -> Void) {
+    static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool) -> Void) {
         guard let token = token else { return }
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
         
@@ -17,17 +17,12 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
             .responseJSON { response in
                 
                 switch response.result {
-                case .success(let value):
-                    guard let jsonResponse = value as? [String: Any],
-                        let id = jsonResponse["id"] as? String else {
-                            completionHandler(false, nil)
-                            return
-                    }
-                    completionHandler(true, id)
-                    completionHandler(true, "kek")
+                case .success:
+                    completionHandler(true)
                 case .failure:
-                    completionHandler(false, nil)
+                    completionHandler(false)
                 }
+                
         }
     }
     
@@ -66,9 +61,10 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
         }
     }
     
-    func getUserTrackList(token: String, userId: String, complectionHandler: @escaping ([Track]) -> Void) {
+    //TODO: - Parsing JSON and error handling
+    func getUserTrackList(token: String, complectionHandler: @escaping ([Track]) -> Void) {
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
-        let urlString = "\(SoundcloudAPIData.globalUrl)/tracks/\(userId)"
+        let urlString = "\(SoundcloudAPIData.globalUrl)/me/tracks"
         
         AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseJSON { response in
             switch response.result {

@@ -6,18 +6,22 @@
 import UIKit
 
 class TrackListPresenter {
-    var userId: String!
-    var token: String!
+    var token: String
     
-    weak var trackListView: TrackListView?
-    let networkService: TrackListNetworkServiceProtocol
-    
-    init(networkService: TrackListNetworkServiceProtocol) {
-        self.networkService = networkService
+    init(token: String) {
+        self.token = token
     }
     
+    weak var view: TrackListViewProtocol?
+    var networkService: TrackListNetworkServiceProtocol?
+    
+}
+
+//TODO: - Duration convert from Int to String
+extension TrackListPresenter: TrackListPresenterProtocol {
+    
     func getTrackList() {
-        networkService.getUserTrackList(token: token, userId: userId) { [weak self] trackList in
+        networkService?.getUserTrackList(token: token) { [weak self] trackList in
             guard let self = self else { return }
             var tracksForView: [TrackViewData] = []
             for track in trackList {
@@ -27,7 +31,7 @@ class TrackListPresenter {
                                                    duration: "mm:ss"))
             }
             DispatchQueue.main.async {
-                self.trackListView?.setTrackList(trackList: tracksForView)
+                self.view?.setTrackList(trackList: tracksForView)
             }
         }
     }

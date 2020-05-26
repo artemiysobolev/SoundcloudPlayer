@@ -26,7 +26,7 @@ protocol LoginRouterProtocol: class {
     static func createLoginModule() -> UIViewController
     
     //Presenter -> Router
-    func presentMainScreen(from view: LoginViewProtocol?)
+    func presentMainScreen(from view: LoginViewProtocol?, token: String)
 }
 
 protocol LoginInteractorInputProtocol: class {
@@ -41,7 +41,7 @@ protocol LoginInteractorOutputProtocol: class {
     // Interactor -> Presenter
     func presentAlert(title: String, message: String)
     func loginAttemptDidFail(errorMessage: String)
-    func loginAttemptSuccess()
+    func loginAttemptSuccess(token: String)
 }
 
 protocol LoginNetworkServiceInputProtocol: class {

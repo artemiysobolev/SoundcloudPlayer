@@ -10,8 +10,8 @@ struct Track {
     let title: String
     let genre: String
     let duration: Int
-    //And later:
     
+    //And later -
     //let downloadUrl: URL
     //let coverImageUrl: URL
 }
