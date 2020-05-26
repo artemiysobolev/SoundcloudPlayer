@@ -6,21 +6,27 @@
 import Foundation
 import Alamofire
 
-class NetworkService: LoginNetworkServiceInputProtocol {
+class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceProtocol {
     
-    static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool) -> Void) {
+    static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool, String?) -> Void) {
         guard let token = token else { return }
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
         
-        AF.request(SoundcloudAPIData.meUrlString, method: .get, headers: [header])
+        AF.request("\(SoundcloudAPIData.globalUrl)/me", method: .get, headers: [header])
             .validate(statusCode: [200])
             .responseJSON { response in
                 
                 switch response.result {
-                case .success:
-                    completionHandler(true)
+                case .success(let value):
+                    guard let jsonResponse = value as? [String: Any],
+                        let id = jsonResponse["id"] as? String else {
+                            completionHandler(false, nil)
+                            return
+                    }
+                    completionHandler(true, id)
+                    completionHandler(true, "kek")
                 case .failure:
-                    completionHandler(false)
+                    completionHandler(false, nil)
                 }
         }
     }
@@ -38,7 +44,7 @@ class NetworkService: LoginNetworkServiceInputProtocol {
         httpBody["username"] = email
         httpBody["password"] = password
         
-        AF.request(SoundcloudAPIData.oauthUrlString, method: .post, parameters: httpBody)
+        AF.request("\(SoundcloudAPIData.globalUrl)/oauth2/token", method: .post, parameters: httpBody)
             .validate(statusCode: [200])
             .responseJSON { response in
                 
@@ -57,6 +63,20 @@ class NetworkService: LoginNetworkServiceInputProtocol {
                         completionHandler(nil, "Some undefined error")
                     }
                 }
+        }
+    }
+    
+    func getUserTrackList(token: String, userId: String, complectionHandler: @escaping ([Track]) -> Void) {
+        let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
+        let urlString = "\(SoundcloudAPIData.globalUrl)/tracks/\(userId)"
+        
+        AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

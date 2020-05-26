@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="y8W-uk-52K">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Track list-->
+        <scene sceneID="VAM-do-I3A">
+            <objects>
+                <viewController id="y8W-uk-52K" customClass="TrackListViewController" customModule="Cloud_Music" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="K2H-B9-5bt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3NE-q1-tYq">
+                                <rect key="frame" x="0.0" y="44" width="375" height="685"/>
+                                <color key="backgroundColor" name="CustomBackgroundColor"/>
+                                <color key="tintColor" name="SoundcloudOrange"/>
+                                <color key="separatorColor" name="CustomBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" name="CustomBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="70" id="lmk-D7-lDU" customClass="TrackListTableViewCell" customModule="Cloud_Music" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lmk-D7-lDU" id="koK-2w-gz5">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="soundcloudLogo" translatesAutoresizingMaskIntoConstraints="NO" id="KH4-t6-nCR">
+                                                    <rect key="frame" x="15" y="7.6666666666666643" width="55" height="55"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="55" id="5LZ-ea-qc2"/>
+                                                        <constraint firstAttribute="width" constant="55" id="Eor-mt-WzP"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="xOa-nL-2bY">
+                                                    <rect key="frame" x="80" y="10.666666666666664" width="280" height="49"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Zgd-ll-8gF">
+                                                            <rect key="frame" x="0.0" y="0.0" width="280" height="21.666666666666668"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="81G-5l-Ah6">
+                                                            <rect key="frame" x="0.0" y="29.666666666666671" width="280" height="19.333333333333329"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwL-hY-Vgv">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="210" height="19.333333333333332"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <color key="textColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mm:ss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ar-qh-TFW">
+                                                                    <rect key="frame" x="220" y="0.0" width="60" height="19.333333333333332"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="60" id="hAH-Zs-RXM"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                    <color key="textColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="81G-5l-Ah6" secondAttribute="trailing" id="5c4-bF-VtZ"/>
+                                                        <constraint firstItem="81G-5l-Ah6" firstAttribute="leading" secondItem="xOa-nL-2bY" secondAttribute="leading" id="9Pb-kZ-2om"/>
+                                                        <constraint firstItem="Zgd-ll-8gF" firstAttribute="leading" secondItem="xOa-nL-2bY" secondAttribute="leading" id="TwH-Ni-eYm"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Zgd-ll-8gF" secondAttribute="trailing" id="k3F-hc-xdb"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <color key="backgroundColor" name="CustomBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="KH4-t6-nCR" firstAttribute="centerY" secondItem="koK-2w-gz5" secondAttribute="centerY" id="OHj-jq-sG2"/>
+                                                <constraint firstItem="xOa-nL-2bY" firstAttribute="leading" secondItem="KH4-t6-nCR" secondAttribute="trailing" constant="10" id="OQS-ul-mAZ"/>
+                                                <constraint firstItem="KH4-t6-nCR" firstAttribute="leading" secondItem="koK-2w-gz5" secondAttribute="leading" constant="15" id="nKa-0G-cbX"/>
+                                                <constraint firstItem="xOa-nL-2bY" firstAttribute="centerY" secondItem="koK-2w-gz5" secondAttribute="centerY" id="rOX-7B-zKG"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="xOa-nL-2bY" secondAttribute="trailing" id="s0A-qP-CDu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" name="CustomBackgroundColor"/>
+                                        <inset key="separatorInset" minX="80" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="coverImage" destination="KH4-t6-nCR" id="nFP-5P-KLG"/>
+                                            <outlet property="durationLabel" destination="0ar-qh-TFW" id="AKT-7h-zGy"/>
+                                            <outlet property="genreLabel" destination="nwL-hY-Vgv" id="a1j-mV-MR6"/>
+                                            <outlet property="titleLabel" destination="Zgd-ll-8gF" id="i5r-uN-b5X"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="y8W-uk-52K" id="am5-wd-chL"/>
+                                    <outlet property="delegate" destination="y8W-uk-52K" id="rBu-oi-uSx"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" name="CustomBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3NE-q1-tYq" firstAttribute="bottom" secondItem="i1E-FA-r9e" secondAttribute="bottom" id="ND2-Hp-pYG"/>
+                            <constraint firstItem="3NE-q1-tYq" firstAttribute="top" secondItem="i1E-FA-r9e" secondAttribute="top" id="cZi-Wz-gOM"/>
+                            <constraint firstItem="3NE-q1-tYq" firstAttribute="leading" secondItem="i1E-FA-r9e" secondAttribute="leading" id="eI3-Xw-MZP"/>
+                            <constraint firstItem="3NE-q1-tYq" firstAttribute="trailing" secondItem="i1E-FA-r9e" secondAttribute="trailing" id="qx0-pt-ZP4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="i1E-FA-r9e"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Track list" image="music.note.list" catalog="system" id="OXL-O7-eIr">
+                        <color key="badgeColor" name="SoundcloudOrange"/>
+                    </tabBarItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="3NE-q1-tYq" id="bq7-B5-atT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Px1-UN-4o0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-308" y="-305.9113300492611"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="music.note.list" catalog="system" width="128" height="113"/>
+        <image name="soundcloudLogo" width="93" height="54"/>
+        <namedColor name="CustomBackgroundColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SoundcloudOrange">
+            <color red="0.97299998998641968" green="0.35699999332427979" blue="0.059000000357627869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

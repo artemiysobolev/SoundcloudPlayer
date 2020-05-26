@@ -19,11 +19,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        _ = KeychainService.save(key: SoundcloudAPIData.accessTokenKeychainName, value: "lol".data(using: .utf8)!)
 
         let token = String(data: KeychainService.load(key: SoundcloudAPIData.accessTokenKeychainName)!, encoding: .utf8)
-        NetworkService.tokenValidationRequest(token: token) { [weak self] isValid in
+        NetworkService.tokenValidationRequest(token: token) { [weak self] isValid, _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if isValid {
-                    let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()
+                    let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! UITabBarController
                     self.window?.rootViewController = mainVC
                     self.window?.makeKeyAndVisible()
                     return

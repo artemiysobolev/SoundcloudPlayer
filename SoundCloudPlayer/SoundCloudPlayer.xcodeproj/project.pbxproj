@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		29DD5E59F7BC9B9BDCABFCD7 /* Pods_SoundCloudPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65D12358D2469541A74D41CA /* Pods_SoundCloudPlayer.framework */; };
+		BA01818E247D730F007AFB9F /* TrackList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA01818D247D730F007AFB9F /* TrackList.storyboard */; };
+		BA018190247D774D007AFB9F /* TrackListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01818F247D774D007AFB9F /* TrackListModel.swift */; };
+		BA018192247D775F007AFB9F /* TrackListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA018191247D775F007AFB9F /* TrackListViewController.swift */; };
+		BA018194247D776C007AFB9F /* TrackListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA018193247D776C007AFB9F /* TrackListPresenter.swift */; };
+		BA018196247D7976007AFB9F /* TrackListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA018195247D7976007AFB9F /* TrackListTableViewCell.swift */; };
+		BA01819C247D9C9C007AFB9F /* TrackListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA01819B247D9C9C007AFB9F /* TrackListProtocols.swift */; };
 		BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB32475AB050029C718 /* AppDelegate.swift */; };
 		BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB52475AB050029C718 /* SceneDelegate.swift */; };
 		BA968CB82475AB050029C718 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB72475AB050029C718 /* LoginView.swift */; };
@@ -30,6 +36,12 @@
 		219AB31CCA4D335B0AC75A37 /* Pods-SoundCloudPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloudPlayer.release.xcconfig"; path = "Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		57F52C2CABC64E4FF4772E20 /* Pods-SoundCloudPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoundCloudPlayer.debug.xcconfig"; path = "Target Support Files/Pods-SoundCloudPlayer/Pods-SoundCloudPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		65D12358D2469541A74D41CA /* Pods_SoundCloudPlayer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoundCloudPlayer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA01818D247D730F007AFB9F /* TrackList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TrackList.storyboard; sourceTree = "<group>"; };
+		BA01818F247D774D007AFB9F /* TrackListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListModel.swift; sourceTree = "<group>"; };
+		BA018191247D775F007AFB9F /* TrackListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListViewController.swift; sourceTree = "<group>"; };
+		BA018193247D776C007AFB9F /* TrackListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListPresenter.swift; sourceTree = "<group>"; };
+		BA018195247D7976007AFB9F /* TrackListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListTableViewCell.swift; sourceTree = "<group>"; };
+		BA01819B247D9C9C007AFB9F /* TrackListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListProtocols.swift; sourceTree = "<group>"; };
 		BA968CB02475AB050029C718 /* Cloud Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cloud Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA968CB32475AB050029C718 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA968CB52475AB050029C718 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +91,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BA01818B247D72FB007AFB9F /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				BA01818F247D774D007AFB9F /* TrackListModel.swift */,
+				BA018191247D775F007AFB9F /* TrackListViewController.swift */,
+				BA018195247D7976007AFB9F /* TrackListTableViewCell.swift */,
+				BA018193247D776C007AFB9F /* TrackListPresenter.swift */,
+				BA01819B247D9C9C007AFB9F /* TrackListProtocols.swift */,
+				BA01818D247D730F007AFB9F /* TrackList.storyboard */,
+			);
+			path = Tracks;
+			sourceTree = "<group>";
+		};
 		BA968CA72475AB050029C718 = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +125,6 @@
 		BA968CB22475AB050029C718 /* SoundCloudPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */,
 				BAF509F6247967CD001B87CA /* Services */,
 				BAF509F1247936B5001B87CA /* Extensions */,
 				BA968CC92475B7620029C718 /* Modules */,
@@ -112,6 +136,7 @@
 		BA968CC82475B6990029C718 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */,
 				BA968CB32475AB050029C718 /* AppDelegate.swift */,
 				BA968CB52475AB050029C718 /* SceneDelegate.swift */,
 				BA968CBC2475AB070029C718 /* Assets.xcassets */,
@@ -124,6 +149,7 @@
 		BA968CC92475B7620029C718 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				BA01818B247D72FB007AFB9F /* Tracks */,
 				BA968CCA2475B7680029C718 /* Login */,
 				BAF509F424795B05001B87CA /* Main.storyboard */,
 			);
@@ -225,6 +251,7 @@
 				BA968CC02475AB070029C718 /* LaunchScreen.storyboard in Resources */,
 				BA968CBD2475AB070029C718 /* Assets.xcassets in Resources */,
 				BA968CBB2475AB050029C718 /* Login.storyboard in Resources */,
+				BA01818E247D730F007AFB9F /* TrackList.storyboard in Resources */,
 				BAF509F524795B05001B87CA /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -295,14 +322,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA018190247D774D007AFB9F /* TrackListModel.swift in Sources */,
 				BA968CB82475AB050029C718 /* LoginView.swift in Sources */,
 				BA968CCC2475D40C0029C718 /* LoginProtocols.swift in Sources */,
+				BA018194247D776C007AFB9F /* TrackListPresenter.swift in Sources */,
 				BA968CD4247666F90029C718 /* NetworkService.swift in Sources */,
 				BA968CD22475DD710029C718 /* LoginInteractor.swift in Sources */,
 				BAF509FA24796C75001B87CA /* KeychainService.swift in Sources */,
+				BA018192247D775F007AFB9F /* TrackListViewController.swift in Sources */,
 				BAF509FC24797028001B87CA /* Data+Extension.swift in Sources */,
 				BA968CD02475DBE40029C718 /* LoginRouter.swift in Sources */,
 				BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */,
+				BA018196247D7976007AFB9F /* TrackListTableViewCell.swift in Sources */,
+				BA01819C247D9C9C007AFB9F /* TrackListProtocols.swift in Sources */,
 				BA968CB62475AB050029C718 /* SceneDelegate.swift in Sources */,
 				BA968CCE2475DB920029C718 /* LoginPresenter.swift in Sources */,
 				BAF509F3247936C8001B87CA /* String+Extension.swift in Sources */,
