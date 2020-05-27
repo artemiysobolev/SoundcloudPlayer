@@ -16,7 +16,11 @@ class MainViewController: UITabBarController {
     }
     
     private func configureTrackListModule() -> UIViewController {
-        guard let view = UIStoryboard(name: "TrackList", bundle: nil).instantiateInitialViewController() as? TrackListViewController else { return UIViewController() }
+        
+        guard let navVC = UIStoryboard(name: "TrackList", bundle: nil).instantiateInitialViewController() as? UINavigationController,
+            let view = navVC.viewControllers.first as? TrackListViewController else {
+                return UIViewController()
+        }
         
         let presenter: TrackListPresenterProtocol = TrackListPresenter(token: token)
         let networkService: TrackListNetworkServiceProtocol = NetworkService()
@@ -25,6 +29,6 @@ class MainViewController: UITabBarController {
         presenter.networkService = networkService
         presenter.view = view
         
-        return view
+        return navVC
      }
 }
