@@ -25,13 +25,13 @@ extension TrackListPresenter: TrackListPresenterProtocol {
             var tracksForView: [TrackViewData] = []
             switch result {
             case .success(let trackList):
-                for track in trackList {
-                    tracksForView.append(TrackViewData(id: track.id,
-                                                       title: track.title,
-                                                       genre: track.genre,
-                                                       duration: track.duration.convertMillisecondsDurationToString(),
-                                                       artworkUrl: track.artworkUrl))
-                }
+                tracksForView = trackList.map({ track -> TrackViewData in
+                    return TrackViewData(id: track.id,
+                                         title: track.title,
+                                         genre: track.genre,
+                                         duration: track.duration.convertMillisecondsDurationToString(),
+                                         artworkUrl: track.artworkUrl)
+                })
             case .failure(let error):
                 print("Some error with JSON: ", error.localizedDescription)
             }
