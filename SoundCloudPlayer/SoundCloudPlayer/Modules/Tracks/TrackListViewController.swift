@@ -31,9 +31,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TrackListTableViewCell
-        cell.titleLabel.text = trackList[indexPath.row].title
-        cell.genreLabel.text = trackList[indexPath.row].genre
-        cell.durationLabel.text = trackList[indexPath.row].duration
+        cell.configureCell(with: trackList[indexPath.row])
         return cell
     }
     

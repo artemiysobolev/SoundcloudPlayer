@@ -61,17 +61,24 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
         }
     }
     
-    //TODO: - Parsing JSON and error handling
-    func getUserTrackList(token: String, complectionHandler: @escaping ([Track]) -> Void) {
+    func getUserTrackList(token: String, complectionHandler: @escaping (Result<[Track], Error>) -> Void) {
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
         let urlString = "\(SoundcloudAPIData.globalUrl)/me/tracks"
         
-        AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseJSON { response in
+        AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseData { response in
             switch response.result {
             case .success(let value):
-                print(value)
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let trackList = try decoder.decode([Track].self, from: value)
+                    print(trackList)
+                    complectionHandler(.success(trackList))
+                } catch {
+                    complectionHandler(.failure(error))
+                }
             case .failure(let error):
-                print(error)
+                complectionHandler(.failure(error))
             }
         }
     }

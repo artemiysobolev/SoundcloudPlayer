@@ -6,7 +6,7 @@
 import UIKit
 
 protocol TrackListNetworkServiceProtocol: class {
-    func getUserTrackList(token: String, complectionHandler: @escaping([Track]) -> Void)
+    func getUserTrackList(token: String, complectionHandler: @escaping(Result<[Track], Error>) -> Void)
 }
 
 protocol TrackListViewProtocol: class {

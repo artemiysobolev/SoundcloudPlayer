@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         
         //        Code for remove valid token
-        _ = KeychainService.save(key: SoundcloudAPIData.accessTokenKeychainName, value: "lol".data(using: .utf8)!)
+//        _ = KeychainService.save(key: SoundcloudAPIData.accessTokenKeychainName, value: "lol".data(using: .utf8)!)
         
         let token = String(data: KeychainService.load(key: SoundcloudAPIData.accessTokenKeychainName)!, encoding: .utf8)
         NetworkService.tokenValidationRequest(token: token) { [weak self] isValid in
