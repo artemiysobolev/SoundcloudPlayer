@@ -15,7 +15,6 @@ class NetworkUIImageView: UIImageView {
     func loadImageUsingUrlString(urlString: String) {
         
         imageUrlString = urlString
-                
         image = nil
         
         if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
@@ -24,7 +23,6 @@ class NetworkUIImageView: UIImageView {
         }
         
         AF.request(urlString).validate(statusCode: [200]).responseData { response in
-            
             switch response.result {
             case .success(let value):
                 DispatchQueue.main.async {

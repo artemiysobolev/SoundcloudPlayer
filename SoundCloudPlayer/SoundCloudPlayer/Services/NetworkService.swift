@@ -22,7 +22,6 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
                 case .failure:
                     completionHandler(false)
                 }
-                
         }
     }
     
