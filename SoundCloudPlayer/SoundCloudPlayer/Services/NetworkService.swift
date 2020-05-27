@@ -72,7 +72,6 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     let trackList = try decoder.decode([Track].self, from: value)
-                    print(trackList)
                     complectionHandler(.success(trackList))
                 } catch {
                     complectionHandler(.failure(error))
