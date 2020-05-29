@@ -5,7 +5,7 @@
 
 import UIKit
 
-class PlayerView: UIView {
+class PlayerView: UIView, PlayerDispayLogic {
     
     @IBOutlet weak var artworkImageView: UIImageView!
     @IBOutlet weak var durationSlider: UISlider!
@@ -14,9 +14,12 @@ class PlayerView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var volumeSlider: UISlider!
+    var interactor: (PlayerBusinessLogic & PlayerDataStore)?
+    var router: PlayerRoutingLogic?
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        setup()
     }
     
     @IBAction func dragDownButtonTapped(_ sender: UIButton) {
@@ -31,6 +34,19 @@ class PlayerView: UIView {
     @IBAction func nextTrackButtonTapped(_ sender: UIButton) {
     }
     @IBAction func playButtonTapped(_ sender: UIButton) {
+        print(interactor?.trackList.map({ track -> String in
+            return track.title
+        }) ?? "")
     }
-        
+    
+    private func setup() {
+        let view = self
+        let interactor = PlayerInteractor()
+        let presenter = PlayerPresenter()
+        let router = PlayerRouter()
+        view.interactor = interactor
+        view.router = router
+        interactor.presenter = presenter
+        presenter.view = view
+    }
 }

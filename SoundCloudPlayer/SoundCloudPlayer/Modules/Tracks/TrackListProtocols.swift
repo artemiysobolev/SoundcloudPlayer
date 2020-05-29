@@ -19,5 +19,5 @@ protocol TrackListPresenterProtocol: class {
     var networkService: TrackListNetworkServiceProtocol? { get set }
     var token: String { get set }
     func getTrackList()
-    func showPlayer(with trackList: [Track])
+    func showPlayer(with trackList: [TrackViewData])
 }

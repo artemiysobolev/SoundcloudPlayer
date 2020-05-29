@@ -19,11 +19,20 @@ class TrackListPresenter: NSObject {
 
 extension TrackListPresenter: TrackListPresenterProtocol {
     
-    func showPlayer(with trackList: [Track]) {
+    func showPlayer(with trackList: [TrackViewData]) {
         guard let window = UIWindow.key,
             let playerView = Bundle.main.loadNibNamed("PlayerView", owner: self, options: nil)?.first as? PlayerView else {
                 return
         }
+        let trackListForPlayer = trackList.map({ track -> Track in
+            return Track(id: track.id,
+                         title: track.title,
+                         genre: track.genre,
+                         duration: 23343,
+                         artworkUrl: track.artworkUrl)
+        })
+        playerView.interactor?.token = token
+        playerView.interactor?.trackList = trackListForPlayer
         window.addSubview(playerView)
     }
     
@@ -48,12 +57,4 @@ extension TrackListPresenter: TrackListPresenterProtocol {
             }
         }
     }
-}
-
-struct TrackViewData {
-    let id: Int
-    let title: String
-    let genre: String?
-    let duration: String
-    let artworkUrl: String?
 }

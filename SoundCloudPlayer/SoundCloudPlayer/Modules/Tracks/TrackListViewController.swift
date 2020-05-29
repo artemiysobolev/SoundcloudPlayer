@@ -55,13 +55,13 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var currentTrackList: [TrackViewData] = []
         if isFiltering {
-            print(filteredTrackList[indexPath.row].title)
-            presenter?.showPlayer(with: [])
+            currentTrackList = Array(filteredTrackList[indexPath.row ..< filteredTrackList.count])
         } else {
-            print(trackList[indexPath.row].title)
-            presenter?.showPlayer(with: [])
+            currentTrackList = Array(trackList[indexPath.row ..< trackList.count])
         }
+        presenter?.showPlayer(with: currentTrackList)
     }
 }
 
