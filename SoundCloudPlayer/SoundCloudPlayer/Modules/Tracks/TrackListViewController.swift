@@ -53,6 +53,16 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if isFiltering {
+            print(filteredTrackList[indexPath.row].title)
+            presenter?.showPlayer(with: [])
+        } else {
+            print(trackList[indexPath.row].title)
+            presenter?.showPlayer(with: [])
+        }
+    }
 }
 
 // MARK: - Search Controller

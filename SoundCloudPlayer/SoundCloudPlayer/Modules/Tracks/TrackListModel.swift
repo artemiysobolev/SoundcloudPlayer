@@ -11,5 +11,4 @@ struct Track: Decodable {
     let genre: String?
     let duration: Int
     let artworkUrl: String?
-    let downloadUrl: String
 }

@@ -5,7 +5,7 @@
 
 import UIKit
 
-class TrackListPresenter {
+class TrackListPresenter: NSObject {
     var token: String
     
     init(token: String) {
@@ -18,6 +18,14 @@ class TrackListPresenter {
 }
 
 extension TrackListPresenter: TrackListPresenterProtocol {
+    
+    func showPlayer(with trackList: [Track]) {
+        guard let window = UIWindow.key,
+            let playerView = Bundle.main.loadNibNamed("PlayerView", owner: self, options: nil)?.first as? PlayerView else {
+                return
+        }
+        window.addSubview(playerView)
+    }
     
     func getTrackList() {
         networkService?.getUserTrackList(token: token) { [weak self] result in
