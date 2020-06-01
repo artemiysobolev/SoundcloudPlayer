@@ -15,25 +15,33 @@ class PlayerView: UIView, PlayerDispayLogic {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet weak var previousButton: UIButton!
+    @IBOutlet weak var nextButton: UIButton!
     
     var interactor: (PlayerBusinessLogic & PlayerDataStore)?
     var router: PlayerRoutingLogic?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setup()
+//        remove thumb image and slider moving ability
+//        makeDurationSliderInactive()
+         setup()
     }
     
     @IBAction func dragDownButtonTapped(_ sender: UIButton) {
         self.removeFromSuperview()
     }
     @IBAction func durationSliderValueChanged(_ sender: UISlider) {
+        interactor?.changeTrackTimeState(with: durationSlider.value)
     }
     @IBAction func volumeSliderValueChanged(_ sender: UISlider) {
+        interactor?.changeVolume(with: volumeSlider.value)
     }
     @IBAction func previousTrackButtonTapped(_ sender: UIButton) {
+        interactor?.playPreviuosTrack()
     }
     @IBAction func nextTrackButtonTapped(_ sender: UIButton) {
+        interactor?.playNextTrack()
     }
     @IBAction func playButtonTapped(_ sender: UIButton) {
         interactor?.changePlayingState()
@@ -56,7 +64,7 @@ class PlayerView: UIView, PlayerDispayLogic {
         } else {
             artworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
         }
-        remainingDurationLabel.text = track.duration
+        remainingDurationLabel.text = "-\(track.duration)"
         titleLabel.text = track.title
     }
     
@@ -68,8 +76,19 @@ class PlayerView: UIView, PlayerDispayLogic {
         }
     }
     
-    func displayDurationState(passed: String, left: String) {
+    func displayDurationState(passed: String, left: String, ratio: Float) {
         currentDurationLabel.text = passed
         remainingDurationLabel.text = left
+        durationSlider.value = ratio
+    }
+    
+    func makeDurationSliderInactive() {
+        durationSlider.isUserInteractionEnabled = false
+        durationSlider.setThumbImage(UIImage(), for: .normal)
+    }
+    
+    func displayEnabledNavigationButtons(isPreviousEnabled: Bool, isNextEnabled: Bool) {
+        previousButton.isEnabled = isPreviousEnabled
+        nextButton.isEnabled = isNextEnabled
     }
 }

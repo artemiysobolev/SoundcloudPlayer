@@ -8,9 +8,10 @@ import AVKit
 
 class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
     
-    var trackList: [Track]?
+    var trackList: [Track]!
+    var currentTrackIndex = 0
     var presenter: PlayerPresentationLogic?
-    var token: String? {
+    var token: String! {
         didSet {
             headers = ["Authorization": "OAuth \(token ?? "")"]
         }
@@ -26,12 +27,21 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
         guard let urlString = track.streamUrl,
             let url = URL(string: urlString),
             let headers = headers else { return }
-        presenter?.presentTrack(track)
-        observeTrackDuration()
         let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
         let playerItem = AVPlayerItem(asset: asset)
+        
+        presenter?.presentTrack(track)
+        checkNearbyTracks()
+        
+        observeTrackDuration()
         player.replaceCurrentItem(with: playerItem)
         player.play()
+        
+        presenter?.presentPlayingState(isPlaying: true)
+    }
+    
+    func changeVolume(with value: Float) {
+        player.volume = value
     }
     
     func changePlayingState() {
@@ -44,7 +54,34 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
         }
     }
     
-    func observeTrackDuration() {
+    func playPreviuosTrack() {
+        let index = currentTrackIndex - 1
+        guard let trackList = trackList,
+            index >= 0 else { return }
+        
+        setTrack(track: trackList[currentTrackIndex - 1])
+        currentTrackIndex -= 1
+        checkNearbyTracks()
+    }
+    
+    func playNextTrack() {
+        let index = currentTrackIndex + 1
+        guard let trackList = trackList,
+            index < trackList.count else { return }
+        
+        setTrack(track: trackList[currentTrackIndex + 1])
+        currentTrackIndex += 1
+        checkNearbyTracks()
+    }
+    
+    func changeTrackTimeState(with value: Float) {
+        guard let durationSeconds = player.currentItem?.duration else { return }
+        let seekTimeSeconds = Float64(value) * CMTimeGetSeconds(durationSeconds)
+        let seekTime = CMTimeMakeWithSeconds(seekTimeSeconds, preferredTimescale: 1)
+        player.seek(to: seekTime)
+    }
+    
+    private func observeTrackDuration() {
         let interval = CMTimeMake(value: 1, timescale: 2)
         player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
             guard let self = self,
@@ -53,7 +90,20 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
             
             let passedMs = Int(time.seconds) * 1000
             let leftMs = Int(duration.seconds) * 1000 - passedMs
-            self.presenter?.presentDurationState(passed: passedMs, left: leftMs)
+            let ratio = self.getDurationRatio()
+            self.presenter?.presentDurationState(passed: passedMs, left: leftMs, ratio: ratio)
         }
+    }
+    
+    private func getDurationRatio() -> Float {
+        let passed = CMTimeGetSeconds(player.currentTime())
+        let duration = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
+        return Float(passed / duration)
+    }
+    
+    private func checkNearbyTracks() {
+        let leftTrackEnabled = currentTrackIndex == 0 ? false : true
+        let rightTrackEnabled = currentTrackIndex == trackList.count - 1 ? false : true
+        presenter?.presentEnabledNavigationButtons(previous: leftTrackEnabled, next: rightTrackEnabled)
     }
 }

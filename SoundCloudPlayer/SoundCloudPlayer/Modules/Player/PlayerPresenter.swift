@@ -19,8 +19,12 @@ class PlayerPresenter: PlayerPresentationLogic {
         view?.togglePlayButtonImage(isPlaying: isPlaying)
     }
     
-    func presentDurationState(passed: Int, left: Int) {
+    func presentDurationState(passed: Int, left: Int, ratio: Float) {
         view?.displayDurationState(passed: (passed).convertMillisecondsDurationToString(),
-                                   left: "-\((left).convertMillisecondsDurationToString())")
+                                   left: "-\((left).convertMillisecondsDurationToString())", ratio: ratio)
+    }
+    
+    func presentEnabledNavigationButtons(previous: Bool, next: Bool) {
+        view?.displayEnabledNavigationButtons(isPreviousEnabled: previous, isNextEnabled: next)
     }
 }

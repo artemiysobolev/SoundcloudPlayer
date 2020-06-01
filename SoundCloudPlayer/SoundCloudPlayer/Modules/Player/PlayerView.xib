@@ -41,8 +41,8 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </imageView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Y3R-gx-Bon">
-                            <rect key="frame" x="0.0" y="395" width="335" height="48"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Y3R-gx-Bon">
+                            <rect key="frame" x="0.0" y="395" width="335" height="56"/>
                             <subviews>
                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ryJ-Nt-qDY">
                                     <rect key="frame" x="-2" y="0.0" width="339" height="31"/>
@@ -52,7 +52,7 @@
                                     </connections>
                                 </slider>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GyJ-Br-bln">
-                                    <rect key="frame" x="0.0" y="30" width="335" height="18"/>
+                                    <rect key="frame" x="0.0" y="38" width="335" height="18"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McT-4c-tlZ">
                                             <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="18"/>
@@ -70,16 +70,16 @@
                                 </stackView>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of track" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="1eR-KO-NPO">
-                            <rect key="frame" x="0.0" y="458" width="335" height="30"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of track" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="1eR-KO-NPO">
+                            <rect key="frame" x="0.0" y="466" width="335" height="30"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="25"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7bC-FW-YbR">
-                            <rect key="frame" x="0.0" y="503" width="335" height="146"/>
+                            <rect key="frame" x="0.0" y="511" width="335" height="138"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZW-si-oXj">
-                                    <rect key="frame" x="0.0" y="63" width="111.66666666666667" height="20"/>
+                                    <rect key="frame" x="0.0" y="59" width="111.66666666666667" height="20"/>
                                     <color key="tintColor" name="SoundcloudOrange"/>
                                     <state key="normal" image="backward.fill" catalog="system">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
@@ -89,7 +89,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjO-un-QcC">
-                                    <rect key="frame" x="111.66666666666666" y="53" width="111.66666666666666" height="40.333333333333343"/>
+                                    <rect key="frame" x="111.66666666666666" y="49" width="111.66666666666666" height="40.333333333333343"/>
                                     <color key="tintColor" name="SoundcloudOrange"/>
                                     <state key="normal" image="pause.fill" catalog="system">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35" scale="large"/>
@@ -99,7 +99,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRR-pA-9qJ">
-                                    <rect key="frame" x="223.33333333333334" y="63" width="111.66666666666666" height="20"/>
+                                    <rect key="frame" x="223.33333333333334" y="59" width="111.66666666666666" height="20"/>
                                     <color key="tintColor" name="SoundcloudOrange"/>
                                     <state key="normal" image="forward.fill" catalog="system">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
@@ -153,7 +153,9 @@
                 <outlet property="artworkImageView" destination="zsn-fb-gYA" id="0oT-CS-XHm"/>
                 <outlet property="currentDurationLabel" destination="McT-4c-tlZ" id="tVE-4h-7i8"/>
                 <outlet property="durationSlider" destination="ryJ-Nt-qDY" id="yd2-vk-pBV"/>
+                <outlet property="nextButton" destination="gRR-pA-9qJ" id="0kM-xb-X3A"/>
                 <outlet property="playButton" destination="cjO-un-QcC" id="cRx-HV-izs"/>
+                <outlet property="previousButton" destination="kZW-si-oXj" id="Zud-YO-f4s"/>
                 <outlet property="remainingDurationLabel" destination="hgg-xr-gxo" id="mQt-Ib-pNe"/>
                 <outlet property="titleLabel" destination="1eR-KO-NPO" id="jkK-Y0-xcm"/>
                 <outlet property="volumeSlider" destination="1qQ-Wf-S2l" id="C28-7B-bn4"/>
