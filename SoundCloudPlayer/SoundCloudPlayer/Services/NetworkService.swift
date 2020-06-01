@@ -66,17 +66,37 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
         
         AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseData { response in
             switch response.result {
-            case .success(let value):
+            case .success(let data):
                 do {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let trackList = try decoder.decode([Track].self, from: value)
+                    let trackList = try decoder.decode([Track].self, from: data)
                     complectionHandler(.success(trackList))
                 } catch {
                     complectionHandler(.failure(error))
                 }
             case .failure(let error):
                 complectionHandler(.failure(error))
+            }
+        }
+    }
+    
+    func tracksSearchRequest(token: String, searchBody: String, completionHandler: @escaping(Result<[Track], Error>) -> Void) {
+        let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
+        let urlString = "\(SoundcloudAPIData.globalUrl)/tracks?q=\(searchBody)&limit=50"
+        AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseData { response in
+            switch response.result {
+            case .success(let data):
+                do {
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let filteredTrackList = try decoder.decode([Track].self, from: data)
+                    completionHandler(.success(filteredTrackList))
+                } catch {
+                    completionHandler(.failure(error))
+                }
+            case .failure(let error):
+                completionHandler(.failure(error))
             }
         }
     }

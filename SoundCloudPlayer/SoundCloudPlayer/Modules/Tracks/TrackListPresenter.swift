@@ -1,6 +1,6 @@
 //
-//	TracksPresenter.swift
-// 	SoundCloudPlayer
+//    TracksPresenter.swift
+//     SoundCloudPlayer
 //
 
 import UIKit
@@ -18,6 +18,22 @@ class TrackListPresenter: NSObject {
 }
 
 extension TrackListPresenter: TrackListPresenterProtocol {
+    
+    func searchTracks(withBody body: String) {
+        networkService?.tracksSearchRequest(token: token, searchBody: body, completionHandler: { [weak self] result in
+            guard let self = self else { return }
+            var tracksForView: [TrackViewData] = []
+            switch result {
+            case .success(let trackList):
+                tracksForView = self.convertTrackListForView(trackList)
+            case .failure(let error):
+                print("Some error with JSON: ", error.localizedDescription)
+            }
+            DispatchQueue.main.async {
+                self.view?.setTrackList(trackList: tracksForView)
+            }
+        })
+    }
     
     func showPlayer(with trackList: [TrackViewData]) {
         guard let window = UIWindow.key,
@@ -56,5 +72,16 @@ extension TrackListPresenter: TrackListPresenterProtocol {
                 self.view?.setTrackList(trackList: tracksForView)
             }
         }
+    }
+    
+    private func convertTrackListForView(_ trackList: [Track]) -> [TrackViewData] {
+        let tracksForView = trackList.map({ track -> TrackViewData in
+            return TrackViewData(id: track.id,
+                                 title: track.title,
+                                 genre: track.genre,
+                                 duration: track.duration.convertMillisecondsDurationToString(),
+                                 artworkUrl: track.artworkUrl)
+        })
+        return tracksForView
     }
 }

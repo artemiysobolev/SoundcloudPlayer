@@ -7,6 +7,7 @@ import UIKit
 
 protocol TrackListNetworkServiceProtocol: class {
     func getUserTrackList(token: String, complectionHandler: @escaping(Result<[Track], Error>) -> Void)
+    func tracksSearchRequest(token: String, searchBody: String, completionHandler: @escaping(Result<[Track], Error>) -> Void)
 }
 
 protocol TrackListViewProtocol: class {
@@ -19,5 +20,6 @@ protocol TrackListPresenterProtocol: class {
     var networkService: TrackListNetworkServiceProtocol? { get set }
     var token: String { get set }
     func getTrackList()
+    func searchTracks(withBody body: String)
     func showPlayer(with trackList: [TrackViewData])
 }

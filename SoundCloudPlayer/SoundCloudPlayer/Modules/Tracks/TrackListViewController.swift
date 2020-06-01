@@ -7,11 +7,13 @@ import UIKit
 
 class TrackListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
+    
     weak private var trackListView: TrackListViewProtocol?
+    private let searchController = UISearchController()
+    private var timer: Timer?
+
     var trackList: [TrackViewData] = []
-    var filteredTrackList: [TrackViewData] = []
     var presenter: TrackListPresenterProtocol?
-    let searchController = UISearchController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,19 +36,12 @@ extension TrackListViewController: TrackListViewProtocol {
 
 extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering {
-            return filteredTrackList.count
-        }
         return trackList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TrackListTableViewCell
-        if isFiltering {
-            cell.configureCell(with: filteredTrackList[indexPath.row])
-        } else {
-            cell.configureCell(with: trackList[indexPath.row])
-        }
+        cell.configureCell(with: trackList[indexPath.row])
         return cell
     }
     
@@ -55,13 +50,9 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var currentTrackList: [TrackViewData] = []
-        if isFiltering {
-            currentTrackList = Array(filteredTrackList[indexPath.row ..< filteredTrackList.count])
-        } else {
-            currentTrackList = Array(trackList[indexPath.row ..< trackList.count])
-        }
-        presenter?.showPlayer(with: currentTrackList)
+        var tracksQueue: [TrackViewData] = []
+        tracksQueue = Array(trackList[indexPath.row ..< trackList.count])
+        presenter?.showPlayer(with: tracksQueue)
     }
 }
 
@@ -73,9 +64,6 @@ extension TrackListViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else { return false }
         return text.isEmpty
     }
-    private var isFiltering: Bool {
-        return searchController.isActive && !searchBarIsEmpty
-    }
     
     func configureSearchController() {
         searchController.searchResultsUpdater = self
@@ -86,20 +74,14 @@ extension TrackListViewController: UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-    
-    func filterContentForSearchText(_ searchText: String) {
-        
-        filteredTrackList = trackList.filter({ (track: TrackViewData) -> Bool in
-            if let genre = track.genre {
-                return (track.title.lowercased().contains(searchText.lowercased()) || genre.lowercased().contains(searchText.lowercased()))
-            } else {
-                return (track.title.lowercased().contains(searchText.lowercased()))
-            }
-        })
-        
-        tableView.reloadData()
+        if searchBarIsEmpty {
+            presenter?.getTrackList()
+        } else {
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
+                self.presenter?.searchTracks(withBody: searchController.searchBar.text!)
+            })
+        }
     }
     
 }
