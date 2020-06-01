@@ -83,7 +83,9 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
     
     func tracksSearchRequest(token: String, searchBody: String, completionHandler: @escaping(Result<[Track], Error>) -> Void) {
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
-        let urlString = "\(SoundcloudAPIData.globalUrl)/tracks?q=\(searchBody)&limit=50"
+        guard let encodedBody = searchBody.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        let urlString = "\(SoundcloudAPIData.globalUrl)/tracks?limit=50&q=" + encodedBody
+        
         AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseData { response in
             switch response.result {
             case .success(let data):
