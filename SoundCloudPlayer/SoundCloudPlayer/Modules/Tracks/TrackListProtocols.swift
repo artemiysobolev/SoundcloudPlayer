@@ -19,7 +19,7 @@ protocol TrackListPresenterProtocol: class {
     var view: TrackListViewProtocol? { get set }
     var networkService: TrackListNetworkServiceProtocol? { get set }
     var token: String { get set }
-    func getTrackList()
+    func getUserTrackList()
     func searchTracks(withBody body: String)
-    func showPlayer(with trackList: [TrackViewData])
+    func showPlayer(from trackIndex: Int)
 }

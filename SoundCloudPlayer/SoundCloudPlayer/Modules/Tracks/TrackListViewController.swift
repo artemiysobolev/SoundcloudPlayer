@@ -19,7 +19,7 @@ class TrackListViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         configureSearchController()
-        presenter?.getTrackList()
+        presenter?.getUserTrackList()
     }
 }
 
@@ -50,9 +50,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var tracksQueue: [TrackViewData] = []
-        tracksQueue = Array(trackList[indexPath.row ..< trackList.count])
-        presenter?.showPlayer(with: tracksQueue)
+        presenter?.showPlayer(from: indexPath.row)
     }
 }
 
@@ -75,7 +73,7 @@ extension TrackListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty {
-            presenter?.getTrackList()
+            presenter?.getUserTrackList()
         } else {
             timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in
