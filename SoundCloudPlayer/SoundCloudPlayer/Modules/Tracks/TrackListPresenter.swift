@@ -18,8 +18,7 @@ class TrackListPresenter: NSObject {
     
     private func convertTrackListForView(_ trackList: [Track]) -> [TrackViewData] {
         let tracksForView = trackList.map({ track -> TrackViewData in
-            return TrackViewData(id: track.id,
-                                 title: track.title,
+            return TrackViewData(title: track.title,
                                  genre: track.genre,
                                  duration: track.duration.convertMillisecondsDurationToString(),
                                  artworkUrl: track.artworkUrl)

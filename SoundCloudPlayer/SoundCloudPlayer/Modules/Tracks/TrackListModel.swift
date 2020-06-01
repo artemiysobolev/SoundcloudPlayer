@@ -14,7 +14,6 @@ struct Track: Decodable {
 }
 
 struct TrackViewData {
-    let id: Int
     let title: String
     let genre: String?
     let duration: String
