@@ -66,7 +66,7 @@ extension TrackListViewController: UISearchResultsUpdating {
     func configureSearchController() {
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Type genre or song title"
+        searchController.searchBar.placeholder = "Type artist name or song title"
         searchController.searchBar.tintColor = UIColor(named: "SoundcloudOrange")
         navigationItem.searchController = searchController
     }
