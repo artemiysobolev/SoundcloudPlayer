@@ -11,6 +11,7 @@ struct Track: Decodable {
     let genre: String?
     let duration: Int
     let artworkUrl: String?
+    let streamUrl: String?
 }
 
 struct TrackViewData {

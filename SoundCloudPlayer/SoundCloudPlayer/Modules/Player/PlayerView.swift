@@ -4,16 +4,18 @@
 //
 
 import UIKit
+import AVKit
 
 class PlayerView: UIView, PlayerDispayLogic {
     
-    @IBOutlet weak var artworkImageView: UIImageView!
+    @IBOutlet weak var artworkImageView: NetworkUIImageView!
     @IBOutlet weak var durationSlider: UISlider!
     @IBOutlet weak var currentDurationLabel: UILabel!
     @IBOutlet weak var remainingDurationLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var volumeSlider: UISlider!
+    
     var interactor: (PlayerBusinessLogic & PlayerDataStore)?
     var router: PlayerRoutingLogic?
     
@@ -34,9 +36,7 @@ class PlayerView: UIView, PlayerDispayLogic {
     @IBAction func nextTrackButtonTapped(_ sender: UIButton) {
     }
     @IBAction func playButtonTapped(_ sender: UIButton) {
-        print(interactor?.trackList.map({ track -> String in
-            return track.title
-        }) ?? "")
+        interactor?.changePlayingState()
     }
     
     private func setup() {
@@ -48,5 +48,23 @@ class PlayerView: UIView, PlayerDispayLogic {
         view.router = router
         interactor.presenter = presenter
         presenter.view = view
+    }
+    
+    func displayTrack(_ track: DisplayedTrack) {
+        if let artworkUrl = track.artworkUrl {
+            artworkImageView.loadImageUsingUrlString(urlString: artworkUrl)
+        } else {
+            artworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
+        }
+        remainingDurationLabel.text = track.duration.convertMillisecondsDurationToString()
+        titleLabel.text = track.title
+    }
+    
+    func togglePlayButtonImage(isPlaying: Bool) {
+        if isPlaying {
+            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+        } else {
+            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        }
     }
 }

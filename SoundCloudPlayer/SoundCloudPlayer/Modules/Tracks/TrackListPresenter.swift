@@ -55,6 +55,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         let tracksQueue: [Track] = Array(currentTrackList[trackIndex ..< currentTrackList.count])
         playerView.interactor?.token = token
         playerView.interactor?.trackList = tracksQueue
+        playerView.interactor?.setTrack(track: tracksQueue.first!)
         window.addSubview(playerView)
     }
     
