@@ -7,6 +7,7 @@ import Foundation
 
 protocol PlayerDispayLogic: class {
     func displayTrack(_ track: DisplayedTrack)
+    func displayDurationState(passed: String, left: String)
     func togglePlayButtonImage(isPlaying: Bool)
 }
 
@@ -22,7 +23,8 @@ protocol PlayerDataStore {
 
 protocol PlayerPresentationLogic {
     func presentTrack(_ track: Track)
-    func presentNewPlayButtonStatus(isPlaying: Bool)
+    func presentPlayingState(isPlaying: Bool)
+    func presentDurationState(passed: Int, left: Int)
 }
 
 protocol PlayerRoutingLogic {

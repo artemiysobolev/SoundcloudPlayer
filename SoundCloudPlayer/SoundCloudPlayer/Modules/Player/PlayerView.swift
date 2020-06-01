@@ -56,7 +56,7 @@ class PlayerView: UIView, PlayerDispayLogic {
         } else {
             artworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
         }
-        remainingDurationLabel.text = track.duration.convertMillisecondsDurationToString()
+        remainingDurationLabel.text = track.duration
         titleLabel.text = track.title
     }
     
@@ -66,5 +66,10 @@ class PlayerView: UIView, PlayerDispayLogic {
         } else {
             playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
         }
+    }
+    
+    func displayDurationState(passed: String, left: String) {
+        currentDurationLabel.text = passed
+        remainingDurationLabel.text = left
     }
 }

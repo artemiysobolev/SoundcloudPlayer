@@ -15,7 +15,6 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
             headers = ["Authorization": "OAuth \(token ?? "")"]
         }
     }
-    
     private let player: AVPlayer = {
         let avPlayer = AVPlayer()
         avPlayer.automaticallyWaitsToMinimizeStalling = false
@@ -28,6 +27,7 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
             let url = URL(string: urlString),
             let headers = headers else { return }
         presenter?.presentTrack(track)
+        observeTrackDuration()
         let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
         let playerItem = AVPlayerItem(asset: asset)
         player.replaceCurrentItem(with: playerItem)
@@ -37,10 +37,23 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
     func changePlayingState() {
         if player.timeControlStatus == .paused {
             player.play()
-            presenter?.presentNewPlayButtonStatus(isPlaying: true)
+            presenter?.presentPlayingState(isPlaying: true)
         } else {
             player.pause()
-            presenter?.presentNewPlayButtonStatus(isPlaying: false)
+            presenter?.presentPlayingState(isPlaying: false)
+        }
+    }
+    
+    func observeTrackDuration() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            guard let self = self,
+                let duration  = self.player.currentItem?.duration,
+                !duration.isIndefinite else { return }
+            
+            let passedMs = Int(time.seconds) * 1000
+            let leftMs = Int(duration.seconds) * 1000 - passedMs
+            self.presenter?.presentDurationState(passed: passedMs, left: leftMs)
         }
     }
 }
