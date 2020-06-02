@@ -50,6 +50,7 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchController.searchBar.endEditing(true)
         presenter?.showPlayer(from: indexPath.row)
     }
 }

@@ -36,7 +36,6 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
         observeTrackDuration()
         player.replaceCurrentItem(with: playerItem)
         player.play()
-        
         presenter?.presentPlayingState(isPlaying: true)
     }
     
