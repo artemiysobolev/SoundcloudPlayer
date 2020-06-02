@@ -33,8 +33,10 @@ protocol PlayerPresentationLogic {
     func presentEnabledNavigationButtons(previous: Bool, next: Bool)
 }
 
-protocol PlayerRoutingLogic {
-    
+protocol PlayerRoutingLogic: class {
+    var tabBarDelegate: PlayerViewAppearanceDelegate? { get set }
+    func presentFullPlayerScreen()
+    func minimizePlayerScreen()
 }
 
 protocol PlayerDataPassing {

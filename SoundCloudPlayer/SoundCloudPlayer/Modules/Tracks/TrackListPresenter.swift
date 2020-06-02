@@ -8,6 +8,7 @@ import UIKit
 class TrackListPresenter: NSObject {
     
     weak var view: TrackListViewProtocol?
+    weak var tabBarDelegate: PlayerViewAppearanceDelegate?
     var token: String
     var networkService: TrackListNetworkServiceProtocol?
     var currentTrackList: [Track]?
@@ -47,16 +48,9 @@ extension TrackListPresenter: TrackListPresenterProtocol {
     }
     
     func showPlayer(from trackIndex: Int) {
-        guard let window = UIWindow.key,
-            let playerView = Bundle.main.loadNibNamed("PlayerView", owner: self, options: nil)?.first as? PlayerView else {
-                return
-        }
         guard let currentTrackList = currentTrackList else { return }
         let tracksQueue: [Track] = Array(currentTrackList[trackIndex ..< currentTrackList.count])
-        playerView.interactor?.token = token
-        playerView.interactor?.trackList = tracksQueue
-        playerView.interactor?.setTrack(track: tracksQueue.first!)
-        window.addSubview(playerView)
+        tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
     }
     
     func getUserTrackList() {

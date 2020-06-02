@@ -6,8 +6,15 @@
 import UIKit
 import AVKit
 
-class PlayerView: UIView, PlayerDispayLogic {
+class PlayerView: UIView {
     
+    @IBOutlet weak var minimizedPlayerView: UIView!
+    @IBOutlet weak var minimizedPlayButton: UIButton!
+    @IBOutlet weak var minimizedNextButton: UIButton!
+    @IBOutlet weak var minimizedArtworkImageView: NetworkUIImageView!
+    @IBOutlet weak var minimizedTitleLabel: UILabel!
+    
+    @IBOutlet weak var fullScreenPlayerStackView: UIStackView!
     @IBOutlet weak var artworkImageView: NetworkUIImageView!
     @IBOutlet weak var durationSlider: UISlider!
     @IBOutlet weak var currentDurationLabel: UILabel!
@@ -25,11 +32,14 @@ class PlayerView: UIView, PlayerDispayLogic {
         super.awakeFromNib()
 //        remove thumb image and slider moving ability
 //        makeDurationSliderInactive()
-         setup()
+        setupModule()
+        setupGestures()
     }
     
+    // MARK: - IBActions
+    
     @IBAction func dragDownButtonTapped(_ sender: UIButton) {
-        self.removeFromSuperview()
+        router?.minimizePlayerScreen()
     }
     @IBAction func durationSliderValueChanged(_ sender: UISlider) {
         interactor?.changeTrackTimeState(with: durationSlider.value)
@@ -47,7 +57,9 @@ class PlayerView: UIView, PlayerDispayLogic {
         interactor?.changePlayingState()
     }
     
-    private func setup() {
+    // MARK: - Setup VIP module
+    
+    private func setupModule() {
         let view = self
         let interactor = PlayerInteractor()
         let presenter = PlayerPresenter()
@@ -58,21 +70,38 @@ class PlayerView: UIView, PlayerDispayLogic {
         presenter.view = view
     }
     
-    func displayTrack(_ track: DisplayedTrack) {
-        if let artworkUrl = track.artworkUrl {
-            artworkImageView.loadImageUsingUrlString(urlString: artworkUrl)
-        } else {
-            artworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
-        }
-        remainingDurationLabel.text = "-\(track.duration)"
-        titleLabel.text = track.title
+    // MARK: - Work with gestures
+    
+    private func setupGestures() {
+        minimizedPlayerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(minimizedViewTapHandle)))
     }
+    
+    @objc private func minimizedViewTapHandle() {
+        router?.presentFullPlayerScreen()
+    }
+    
+    // MARK: - Private methods
+    
+    private func makeDurationSliderInactive() {
+        durationSlider.isUserInteractionEnabled = false
+        durationSlider.setThumbImage(UIImage(), for: .normal)
+    }
+    
+}
+
+// MARK: - DispayLogic protocol
+
+extension PlayerView: PlayerDispayLogic {
     
     func togglePlayButtonImage(isPlaying: Bool) {
         if isPlaying {
-            playButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            let pauseImage = UIImage(systemName: "pause.fill")
+            playButton.setImage(pauseImage, for: .normal)
+            minimizedPlayButton.setImage(pauseImage, for: .normal)
         } else {
-            playButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            let playImage = UIImage(systemName: "play.fill")
+            minimizedPlayButton.setImage(playImage, for: .normal)
+            playButton.setImage(playImage, for: .normal)
         }
     }
     
@@ -82,13 +111,21 @@ class PlayerView: UIView, PlayerDispayLogic {
         durationSlider.value = ratio
     }
     
-    func makeDurationSliderInactive() {
-        durationSlider.isUserInteractionEnabled = false
-        durationSlider.setThumbImage(UIImage(), for: .normal)
-    }
-    
     func displayEnabledNavigationButtons(isPreviousEnabled: Bool, isNextEnabled: Bool) {
         previousButton.isEnabled = isPreviousEnabled
         nextButton.isEnabled = isNextEnabled
+        minimizedNextButton.isEnabled = isNextEnabled
+    }
+    
+    func displayTrack(_ track: DisplayedTrack) {
+        if let artworkUrl = track.artworkUrl {
+            artworkImageView.loadImageUsingUrlString(urlString: artworkUrl)
+            minimizedArtworkImageView.loadImageUsingUrlString(urlString: artworkUrl)
+        } else {
+            artworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
+        }
+        remainingDurationLabel.text = "-\(track.duration)"
+        titleLabel.text = track.title
+        minimizedTitleLabel.text = track.title
     }
 }

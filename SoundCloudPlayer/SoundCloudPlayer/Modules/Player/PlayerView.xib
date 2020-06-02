@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait" appearance="dark"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -14,6 +14,67 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1b-PH-oRk">
+                    <rect key="frame" x="0.0" y="44" width="375" height="65"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="JqP-gs-ym7">
+                            <rect key="frame" x="15" y="5" width="340" height="55"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFv-j9-7uq" customClass="NetworkUIImageView" customModule="Cloud_Music" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="jFv-j9-7uq" secondAttribute="height" multiplier="1:1" id="ZY2-cZ-hES"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVS-u7-825">
+                                    <rect key="frame" x="70" y="0.0" width="160" height="55"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qJS-OT-0eJ">
+                                    <rect key="frame" x="245" y="0.0" width="40" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="mPe-70-6KF"/>
+                                    </constraints>
+                                    <color key="tintColor" name="SoundcloudOrange"/>
+                                    <state key="normal" image="pause.fill" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="30"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="playButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="r5F-Uc-oOr"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Par-Um-2NK">
+                                    <rect key="frame" x="300" y="0.0" width="40" height="55"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="XHq-zN-cbh"/>
+                                    </constraints>
+                                    <color key="tintColor" name="SoundcloudOrange"/>
+                                    <state key="normal" image="forward.fill" catalog="system">
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="nextTrackButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="KVD-sc-3XT"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="CustomLightBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="2jR-NS-AcX"/>
+                        <constraint firstAttribute="trailing" secondItem="JqP-gs-ym7" secondAttribute="trailing" constant="20" id="Hfs-xP-Zai"/>
+                        <constraint firstItem="JqP-gs-ym7" firstAttribute="leading" secondItem="O1b-PH-oRk" secondAttribute="leading" constant="15" id="SnB-8t-uWi"/>
+                        <constraint firstAttribute="bottom" secondItem="JqP-gs-ym7" secondAttribute="bottom" constant="5" id="UB0-ha-leL"/>
+                        <constraint firstItem="JqP-gs-ym7" firstAttribute="top" secondItem="O1b-PH-oRk" secondAttribute="top" constant="5" id="ygZ-sJ-JXS"/>
+                    </constraints>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mSe-2v-VLg">
                     <rect key="frame" x="20" y="54" width="335" height="684"/>
                     <subviews>
@@ -146,6 +207,9 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mSe-2v-VLg" secondAttribute="bottom" constant="40" id="3Lj-RF-QQM"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mSe-2v-VLg" secondAttribute="trailing" constant="20" id="cXn-h9-389"/>
                 <constraint firstItem="mSe-2v-VLg" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="cYl-Fr-FvB"/>
+                <constraint firstItem="O1b-PH-oRk" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="eUG-m8-fDL"/>
+                <constraint firstItem="O1b-PH-oRk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="mZu-ff-q7v"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="O1b-PH-oRk" secondAttribute="trailing" id="pAp-Dz-fgs"/>
                 <constraint firstItem="mSe-2v-VLg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="wkT-5t-L2K"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -153,8 +217,14 @@
                 <outlet property="artworkImageView" destination="zsn-fb-gYA" id="0oT-CS-XHm"/>
                 <outlet property="currentDurationLabel" destination="McT-4c-tlZ" id="tVE-4h-7i8"/>
                 <outlet property="durationSlider" destination="ryJ-Nt-qDY" id="yd2-vk-pBV"/>
+                <outlet property="fullScreenPlayerStackView" destination="mSe-2v-VLg" id="7hm-Q8-VAV"/>
+                <outlet property="minimizedArtworkImageView" destination="jFv-j9-7uq" id="aNy-WR-AFA"/>
+                <outlet property="minimizedNextButton" destination="Par-Um-2NK" id="qKo-XR-ltM"/>
+                <outlet property="minimizedPlayButton" destination="qJS-OT-0eJ" id="MaT-LZ-lOV"/>
+                <outlet property="minimizedPlayerView" destination="O1b-PH-oRk" id="RlZ-gM-ZHx"/>
+                <outlet property="minimizedTitleLabel" destination="PVS-u7-825" id="TGf-Tm-fw3"/>
                 <outlet property="nextButton" destination="gRR-pA-9qJ" id="0kM-xb-X3A"/>
-                <outlet property="playButton" destination="cjO-un-QcC" id="cRx-HV-izs"/>
+                <outlet property="playButton" destination="cjO-un-QcC" id="R0u-cc-0Q1"/>
                 <outlet property="previousButton" destination="kZW-si-oXj" id="Zud-YO-f4s"/>
                 <outlet property="remainingDurationLabel" destination="hgg-xr-gxo" id="mQt-Ib-pNe"/>
                 <outlet property="titleLabel" destination="1eR-KO-NPO" id="jkK-Y0-xcm"/>
@@ -172,6 +242,9 @@
         <image name="speaker.fill" catalog="system" width="128" height="121"/>
         <namedColor name="CustomBackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="CustomLightBackgroundColor">
+            <color red="0.96470588235294119" green="0.96470588235294119" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="SoundcloudOrange">
             <color red="0.97299998998641968" green="0.35699999332427979" blue="0.059000000357627869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

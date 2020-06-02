@@ -6,22 +6,58 @@
 import Foundation
 import AVKit
 
-class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
-    
-    var trackList: [Track]!
-    var currentTrackIndex = 0
-    var presenter: PlayerPresentationLogic?
+class PlayerInteractor: PlayerDataStore {
+
+    var trackList: [Track]! {
+        didSet {
+            currentTrackIndex = 0
+        }
+    }
     var token: String! {
         didSet {
             headers = ["Authorization": "OAuth \(token ?? "")"]
         }
     }
+    var currentTrackIndex = 0
+    var presenter: PlayerPresentationLogic?
+
     private let player: AVPlayer = {
         let avPlayer = AVPlayer()
         avPlayer.automaticallyWaitsToMinimizeStalling = false
         return avPlayer
     }()
     private var headers: [String: String]!
+    
+    // MARK: - Private methods
+    private func observeTrackDuration() {
+        let interval = CMTimeMake(value: 1, timescale: 2)
+        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+            guard let self = self,
+                let duration  = self.player.currentItem?.duration,
+                !duration.isIndefinite else { return }
+            
+            let passedMs = Int(time.seconds) * 1000
+            let leftMs = Int(duration.seconds) * 1000 - passedMs
+            let ratio = self.getDurationRatio()
+            self.presenter?.presentDurationState(passed: passedMs, left: leftMs, ratio: ratio)
+        }
+    }
+    
+    private func getDurationRatio() -> Float {
+        let passed = CMTimeGetSeconds(player.currentTime())
+        let duration = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
+        return Float(passed / duration)
+    }
+    
+    private func checkNearbyTracks() {
+        let leftTrackEnabled = currentTrackIndex == 0 ? false : true
+        let rightTrackEnabled = currentTrackIndex == trackList.count - 1 ? false : true
+        presenter?.presentEnabledNavigationButtons(previous: leftTrackEnabled, next: rightTrackEnabled)
+    }
+}
+
+// MARK: - BusinessLogic protocol
+extension PlayerInteractor: PlayerBusinessLogic {
     
     func setTrack(track: Track) {
         guard let urlString = track.streamUrl,
@@ -80,29 +116,4 @@ class PlayerInteractor: PlayerDataStore, PlayerBusinessLogic {
         player.seek(to: seekTime)
     }
     
-    private func observeTrackDuration() {
-        let interval = CMTimeMake(value: 1, timescale: 2)
-        player.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
-            guard let self = self,
-                let duration  = self.player.currentItem?.duration,
-                !duration.isIndefinite else { return }
-            
-            let passedMs = Int(time.seconds) * 1000
-            let leftMs = Int(duration.seconds) * 1000 - passedMs
-            let ratio = self.getDurationRatio()
-            self.presenter?.presentDurationState(passed: passedMs, left: leftMs, ratio: ratio)
-        }
-    }
-    
-    private func getDurationRatio() -> Float {
-        let passed = CMTimeGetSeconds(player.currentTime())
-        let duration = CMTimeGetSeconds(player.currentItem?.duration ?? CMTimeMake(value: 1, timescale: 1))
-        return Float(passed / duration)
-    }
-    
-    private func checkNearbyTracks() {
-        let leftTrackEnabled = currentTrackIndex == 0 ? false : true
-        let rightTrackEnabled = currentTrackIndex == trackList.count - 1 ? false : true
-        presenter?.presentEnabledNavigationButtons(previous: leftTrackEnabled, next: rightTrackEnabled)
-    }
 }
