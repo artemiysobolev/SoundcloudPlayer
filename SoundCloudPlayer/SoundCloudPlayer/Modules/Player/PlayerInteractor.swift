@@ -38,6 +38,10 @@ class PlayerInteractor: PlayerDataStore {
             
             let passedMs = Int(time.seconds) * 1000
             let leftMs = Int(duration.seconds) * 1000 - passedMs
+            guard leftMs != 0 else {
+                self.playNextTrack()
+                return
+            }
             let ratio = self.getDurationRatio()
             self.presenter?.presentDurationState(passed: passedMs, left: leftMs, ratio: ratio)
         }

@@ -16,7 +16,7 @@ class PlayerView: UIView {
     
     @IBOutlet weak var fullScreenPlayerStackView: UIStackView!
     @IBOutlet weak var artworkImageView: NetworkUIImageView!
-    @IBOutlet weak var durationSlider: UISlider!
+    @IBOutlet weak var durationProgressView: UIProgressView!
     @IBOutlet weak var currentDurationLabel: UILabel!
     @IBOutlet weak var remainingDurationLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
@@ -40,9 +40,6 @@ class PlayerView: UIView {
     
     @IBAction func dragDownButtonTapped(_ sender: UIButton) {
         router?.minimizePlayerScreen()
-    }
-    @IBAction func durationSliderValueChanged(_ sender: UISlider) {
-        interactor?.changeTrackTimeState(with: durationSlider.value)
     }
     @IBAction func volumeSliderValueChanged(_ sender: UISlider) {
         interactor?.changeVolume(with: volumeSlider.value)
@@ -80,13 +77,6 @@ class PlayerView: UIView {
         router?.presentFullPlayerScreen()
     }
     
-    // MARK: - Private methods
-    
-    private func makeDurationSliderInactive() {
-        durationSlider.isUserInteractionEnabled = false
-        durationSlider.setThumbImage(UIImage(), for: .normal)
-    }
-    
 }
 
 // MARK: - DispayLogic protocol
@@ -108,7 +98,7 @@ extension PlayerView: PlayerDispayLogic {
     func displayDurationState(passed: String, left: String, ratio: Float) {
         currentDurationLabel.text = passed
         remainingDurationLabel.text = left
-        durationSlider.value = ratio
+        durationProgressView.progress = ratio
     }
     
     func displayEnabledNavigationButtons(isPreviousEnabled: Bool, isNextEnabled: Bool) {
@@ -123,6 +113,7 @@ extension PlayerView: PlayerDispayLogic {
             minimizedArtworkImageView.loadImageUsingUrlString(urlString: artworkUrl)
         } else {
             artworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
+            minimizedArtworkImageView.image = #imageLiteral(resourceName: "emptyArtwork")
         }
         remainingDurationLabel.text = "-\(track.duration)"
         titleLabel.text = track.title
