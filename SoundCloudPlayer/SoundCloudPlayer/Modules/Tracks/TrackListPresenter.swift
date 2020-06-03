@@ -5,7 +5,7 @@
 
 import UIKit
 
-class TrackListPresenter: NSObject {
+class TrackListPresenter {
     
     weak var view: TrackListViewProtocol?
     weak var tabBarDelegate: PlayerViewAppearanceDelegate?
