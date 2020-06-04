@@ -22,7 +22,6 @@
 		BA1E4E7524818940009E1F3D /* PlayerInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1E4E7424818940009E1F3D /* PlayerInteractor.swift */; };
 		BA47005E247EC5DA00CF73C1 /* Int+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47005D247EC5DA00CF73C1 /* Int+Extension.swift */; };
 		BA470060247EDAFB00CF73C1 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA47005F247EDAFB00CF73C1 /* UIImageView+Extension.swift */; };
-		BA93EDF424814353008CC905 /* UIWindow+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA93EDF324814353008CC905 /* UIWindow+Extension.swift */; };
 		BA93EDF62481442C008CC905 /* PlayerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA93EDF52481442C008CC905 /* PlayerView.xib */; };
 		BA93EDFA2481459D008CC905 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA93EDF92481459D008CC905 /* PlayerView.swift */; };
 		BA968CB42475AB050029C718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CB32475AB050029C718 /* AppDelegate.swift */; };
@@ -60,7 +59,6 @@
 		BA1E4E7424818940009E1F3D /* PlayerInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerInteractor.swift; sourceTree = "<group>"; };
 		BA47005D247EC5DA00CF73C1 /* Int+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extension.swift"; sourceTree = "<group>"; };
 		BA47005F247EDAFB00CF73C1 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
-		BA93EDF324814353008CC905 /* UIWindow+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Extension.swift"; sourceTree = "<group>"; };
 		BA93EDF52481442C008CC905 /* PlayerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerView.xib; sourceTree = "<group>"; };
 		BA93EDF92481459D008CC905 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		BA968CB02475AB050029C718 /* Cloud Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cloud Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,7 +209,6 @@
 				BAF509F2247936C8001B87CA /* String+Extension.swift */,
 				BA47005D247EC5DA00CF73C1 /* Int+Extension.swift */,
 				BA47005F247EDAFB00CF73C1 /* UIImageView+Extension.swift */,
-				BA93EDF324814353008CC905 /* UIWindow+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -362,7 +359,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA018190247D774D007AFB9F /* TrackListModel.swift in Sources */,
-				BA93EDF424814353008CC905 /* UIWindow+Extension.swift in Sources */,
 				BA1E4E6D24818341009E1F3D /* PlayerProtocols.swift in Sources */,
 				BA968CB82475AB050029C718 /* LoginView.swift in Sources */,
 				BA968CCC2475D40C0029C718 /* LoginProtocols.swift in Sources */,
