@@ -24,6 +24,7 @@ class PlayerView: UIView {
     @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var previousButton: UIButton!
     @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var shuffleButton: UIButton!
     
     var interactor: (PlayerBusinessLogic & PlayerDataStore)?
     var router: PlayerRoutingLogic?
@@ -52,6 +53,9 @@ class PlayerView: UIView {
     }
     @IBAction func playButtonTapped(_ sender: UIButton) {
         interactor?.changePlayingState()
+    }
+    @IBAction func shuffleButtonTapped(_ sender: UIButton) {
+        interactor?.changeShuffling()
     }
     
     // MARK: - Setup VIP module
@@ -119,4 +123,9 @@ extension PlayerView: PlayerDispayLogic {
         titleLabel.text = track.title
         minimizedTitleLabel.text = track.title
     }
+    
+    func displayShufflingState(isShuffled: Bool) {
+        shuffleButton.backgroundColor = isShuffled ? .placeholderText : .none
+    }
+    
 }

@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Track: Decodable {
+struct Track: Decodable, Equatable {
     let id: Int
     let title: String
     let genre: String?

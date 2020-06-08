@@ -9,6 +9,7 @@ protocol PlayerDispayLogic: class {
     func displayTrack(_ track: DisplayedTrack)
     func togglePlayButtonImage(isPlaying: Bool)
     func displayDurationState(passed: String, left: String, ratio: Float)
+    func displayShufflingState(isShuffled: Bool)
     func displayEnabledNavigationButtons(isPreviousEnabled: Bool, isNextEnabled: Bool)
 }
 
@@ -16,6 +17,7 @@ protocol PlayerBusinessLogic {
     func setTrack(track: Track)
     func changePlayingState()
     func changeTrackTimeState(with value: Float)
+    func changeShuffling()
     func changeVolume(with value: Float)
     func playPreviuosTrack()
     func playNextTrack()
@@ -31,6 +33,8 @@ protocol PlayerPresentationLogic {
     func presentPlayingState(isPlaying: Bool)
     func presentDurationState(passed: Int, left: Int, ratio: Float)
     func presentEnabledNavigationButtons(previous: Bool, next: Bool)
+    func presentShufflingState(isShuffled: Bool)
+
 }
 
 protocol PlayerRoutingLogic: class {

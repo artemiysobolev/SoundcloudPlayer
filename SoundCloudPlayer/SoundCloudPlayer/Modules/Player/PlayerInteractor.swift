@@ -11,14 +11,26 @@ class PlayerInteractor: PlayerDataStore {
     var trackList: [Track]! {
         didSet {
             currentTrackIndex = 0
+            shuffledTrackList = nil
         }
     }
+    var shuffledTrackList: [Track]? {
+        didSet {
+            presenter?.presentShufflingState(isShuffled: shuffledTrackList != nil)
+            shuffledCurrentTrackIndex = 0
+        }
+    }
+    var isShuffleActive: Bool {
+        return shuffledTrackList != nil
+    }
+    
     var token: String! {
         didSet {
             headers = ["Authorization": "OAuth \(token ?? "")"]
         }
     }
     var currentTrackIndex = 0
+    var shuffledCurrentTrackIndex = 0
     var presenter: PlayerPresentationLogic?
 
     private let player: AVPlayer = {
@@ -54,8 +66,9 @@ class PlayerInteractor: PlayerDataStore {
     }
     
     private func checkNearbyTracks() {
-        let leftTrackEnabled = currentTrackIndex == 0 ? false : true
-        let rightTrackEnabled = currentTrackIndex == trackList.count - 1 ? false : true
+        let (list, index) = shuffledTrackList != nil ? (shuffledTrackList!, shuffledCurrentTrackIndex) : (trackList!, currentTrackIndex)
+        let leftTrackEnabled = index == 0 ? false : true
+        let rightTrackEnabled = index == list.count - 1 ? false : true
         presenter?.presentEnabledNavigationButtons(previous: leftTrackEnabled, next: rightTrackEnabled)
     }
 }
@@ -94,22 +107,40 @@ extension PlayerInteractor: PlayerBusinessLogic {
     }
     
     func playPreviuosTrack() {
-        let index = currentTrackIndex - 1
-        guard let trackList = trackList,
-            index >= 0 else { return }
+        let usingTrackList = isShuffleActive ? shuffledTrackList : trackList
+        let usingIndex = isShuffleActive ? shuffledCurrentTrackIndex : currentTrackIndex
         
-        setTrack(track: trackList[currentTrackIndex - 1])
-        currentTrackIndex -= 1
+        let previousIndex = usingIndex - 1
+        guard let trackList = usingTrackList,
+            previousIndex >= 0 else { return }
+        
+        setTrack(track: trackList[previousIndex])
+        
+        if isShuffleActive {
+            shuffledCurrentTrackIndex -= 1
+        } else {
+            currentTrackIndex -= 1
+        }
+        
         checkNearbyTracks()
     }
     
     func playNextTrack() {
-        let index = currentTrackIndex + 1
-        guard let trackList = trackList,
-            index < trackList.count else { return }
+        let usingTrackList = isShuffleActive ? shuffledTrackList : trackList
+        let usingIndex = isShuffleActive ? shuffledCurrentTrackIndex : currentTrackIndex
         
-        setTrack(track: trackList[currentTrackIndex + 1])
-        currentTrackIndex += 1
+        let nextIndex = usingIndex + 1
+        guard let trackList = usingTrackList,
+            nextIndex < trackList.count else { return }
+        
+        setTrack(track: trackList[nextIndex])
+        
+        if isShuffleActive {
+            shuffledCurrentTrackIndex += 1
+        } else {
+            currentTrackIndex += 1
+        }
+        
         checkNearbyTracks()
     }
     
@@ -118,6 +149,24 @@ extension PlayerInteractor: PlayerBusinessLogic {
         let seekTimeSeconds = Float64(value) * CMTimeGetSeconds(durationSeconds)
         let seekTime = CMTimeMakeWithSeconds(seekTimeSeconds, preferredTimescale: 1)
         player.seek(to: seekTime)
+    }
+    
+    func changeShuffling() {
+        
+        if isShuffleActive {
+            guard let index = trackList.firstIndex(of: shuffledTrackList![shuffledCurrentTrackIndex]) else { return }
+            currentTrackIndex = index
+            shuffledTrackList = nil
+        } else {
+            let nextTrackIndex = currentTrackIndex + 1
+            guard nextTrackIndex < trackList.count else { return }
+            
+            shuffledTrackList = Array(trackList[0...currentTrackIndex])
+            shuffledTrackList?.append(contentsOf: Array(trackList[nextTrackIndex ..< trackList.count]).shuffled())
+            shuffledCurrentTrackIndex = currentTrackIndex
+        }
+        
+        checkNearbyTracks()
     }
     
 }

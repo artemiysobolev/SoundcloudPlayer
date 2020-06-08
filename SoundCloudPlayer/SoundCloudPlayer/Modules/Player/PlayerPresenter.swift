@@ -27,4 +27,8 @@ class PlayerPresenter: PlayerPresentationLogic {
     func presentEnabledNavigationButtons(previous: Bool, next: Bool) {
         view?.displayEnabledNavigationButtons(isPreviousEnabled: previous, isNextEnabled: next)
     }
+    
+    func presentShufflingState(isShuffled: Bool) {
+        view?.displayShufflingState(isShuffled: isShuffled)
+    }
 }
