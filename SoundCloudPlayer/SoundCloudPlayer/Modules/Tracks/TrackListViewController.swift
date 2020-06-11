@@ -19,7 +19,15 @@ class TrackListViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         configureSearchController()
-        presenter?.getUserTrackList()
+        configureTableView()
+        presenter?.getTrackList()
+    }
+    
+    private func configureTableView() {
+        let cellNib = UINib(nibName: "TrackCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: TrackCell.cellIdentifier)
+        tableView.delegate = self
+        tableView.dataSource = self
     }
 }
 
@@ -40,13 +48,14 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TrackListTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: TrackCell.cellIdentifier) as? TrackCell else {
+            return UITableViewCell()
+        }
         cell.configureCell(with: trackList[indexPath.row])
+        cell.tapAction = {
+            self.presenter?.cellButtonTapped(at: indexPath.row)
+        }
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -74,7 +83,7 @@ extension TrackListViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         if searchBarIsEmpty {
-            presenter?.getUserTrackList()
+            presenter?.getTrackList()
         } else {
             timer?.invalidate()
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { _ in

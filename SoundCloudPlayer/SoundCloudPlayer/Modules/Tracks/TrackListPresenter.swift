@@ -7,6 +7,7 @@ import UIKit
 
 class TrackListPresenter {
     
+    let coreDataService = CoreDataService.shared
     weak var view: TrackListViewProtocol?
     weak var tabBarDelegate: PlayerViewAppearanceDelegate?
     var token: String
@@ -53,7 +54,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
     }
     
-    func getUserTrackList() {
+    func getTrackList() {
         networkService?.getUserTrackList(token: token) { [weak self] result in
             guard let self = self else { return }
             var tracksForView: [TrackViewData] = []
@@ -68,5 +69,10 @@ extension TrackListPresenter: TrackListPresenterProtocol {
                 self.view?.setTrackList(trackList: tracksForView)
             }
         }
+    }
+    
+    func cellButtonTapped(at index: Int) {
+        guard let track = currentTrackList?[index] else { return }
+        coreDataService.saveTrackToDevice(track)
     }
 }

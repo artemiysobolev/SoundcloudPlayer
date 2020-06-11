@@ -21,8 +21,27 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()        
         let trackListVC = configureTrackListModule()
+        let cachedLibraryVC = configureCachedLibraryModule()
         configurePlayerView()
-        viewControllers = [trackListVC]
+        viewControllers = [trackListVC, cachedLibraryVC]
+    }
+        
+    private func configureCachedLibraryModule() -> UIViewController {
+        guard let navVC = UIStoryboard(name: "TrackList", bundle: nil).instantiateInitialViewController() as? UINavigationController,
+            let view = navVC.viewControllers.first as? TrackListViewController else {
+                return UIViewController()
+        }
+        
+        let presenter: TrackListPresenterProtocol = CachedLibraryPresenter()
+        
+        view.presenter = presenter
+        presenter.view = view
+        presenter.tabBarDelegate = self
+        
+        view.tabBarItem.image = UIImage(systemName: "square.and.arrow.down.fill")
+        view.tabBarItem.title = "Cached Library"
+        
+        return navVC
     }
     
     private func configureTrackListModule() -> UIViewController {
@@ -39,6 +58,9 @@ class MainViewController: UITabBarController {
         presenter.networkService = networkService
         presenter.view = view
         presenter.tabBarDelegate = self
+        
+        view.tabBarItem.image = UIImage(systemName: "music.note.list")
+        view.tabBarItem.title = "Track List"
         
         return navVC
      }

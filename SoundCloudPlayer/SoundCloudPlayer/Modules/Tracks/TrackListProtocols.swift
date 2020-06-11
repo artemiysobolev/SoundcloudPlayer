@@ -19,8 +19,8 @@ protocol TrackListPresenterProtocol: class {
     var view: TrackListViewProtocol? { get set }
     var networkService: TrackListNetworkServiceProtocol? { get set }
     var tabBarDelegate: PlayerViewAppearanceDelegate? { get set }
-    var token: String { get set }
-    func getUserTrackList()
+    func getTrackList()
     func searchTracks(withBody body: String)
     func showPlayer(from trackIndex: Int)
+    func cellButtonTapped(at index: Int)
 }
