@@ -11,7 +11,7 @@ class PlayerPresenter: PlayerPresentationLogic {
     func presentTrack(_ track: Track) {
         let displayedTrack = DisplayedTrack(title: track.title,
                                             duration: track.duration.convertMillisecondsDurationToString(),
-                                            artworkUrl: track.artworkUrl?.replacingOccurrences(of: "large", with: "crop"))
+                                            artworkUrl: track.largeArtworkUrl)
         view?.displayTrack(displayedTrack)
     }
     

@@ -8,12 +8,30 @@ import Alamofire
 
 var imageCache = NSCache<NSString, UIImage>()
 
-class NetworkUIImageView: UIImageView {
+class CustomUIImageView: UIImageView {
     
     var imageUrlString: String?
     
     func loadImageUsingUrlString(urlString: String) {
-        
+        image = nil
+        if let url = URL(string: urlString), url.isFileURL {
+            loadImageFromDevice(with: url.path)
+        } else {
+            loadImageFromNetwork(with: urlString)
+        }
+        return
+    }
+    
+    private func loadImageFromDevice(with path: String) {
+        if let data = FileManager.default.contents(atPath: path) {
+            self.image = UIImage(data: data)
+        } else {
+            self.image = #imageLiteral(resourceName: "emptyArtwork")
+        }
+        return
+    }
+    
+    private func loadImageFromNetwork(with urlString: String) {
         imageUrlString = urlString
         image = nil
         
@@ -41,5 +59,4 @@ class NetworkUIImageView: UIImageView {
             }
         }
     }
-    
 }

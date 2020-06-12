@@ -25,18 +25,18 @@ class CoreDataService {
         return container
     }()
     
-    func saveTrackToDevice(_ track: Track) {
+    func saveTrackToDevice(_ track: Track, artworkImagePath: URL?, audioFilePath: URL?) {
         guard let entity = NSEntityDescription.entity(forEntityName: "CachedTrack", in: context),
             let trackObject = NSManagedObject(entity: entity, insertInto: context) as? CachedTrack else { return }
         
-        if let urlString = track.artworkUrl,
-            let url = URL(string: urlString) {
-            trackObject.artworkImagePath = url
+        if let imagePath = artworkImagePath {
+            trackObject.artworkImagePath = imagePath
         }
         
-        if let urlString = track.streamUrl,
-            let url = URL(string: urlString) {
-            trackObject.audioFilePath = url
+        if let audioPath = audioFilePath {
+            trackObject.audioFilePath = audioPath
+        } else {
+            trackObject.audioFilePath = URL(string: track.streamUrl!)
         }
         
         if let genre = track.genre {
@@ -78,6 +78,13 @@ class CoreDataService {
     }
     
     func removeTrack(_ track: CachedTrack) {
+        if let path = track.artworkImagePath {
+            do {
+                try FileManager.default.removeItem(at: path)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
         context.delete(track)
         saveContext()
     }

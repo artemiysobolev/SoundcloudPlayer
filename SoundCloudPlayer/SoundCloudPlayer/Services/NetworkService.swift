@@ -102,4 +102,24 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
             }
         }
     }
+    
+    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(URL?, URL?) -> Void) {
+        guard let url = URL(string: urlString) else { return }
+        let destination: DownloadRequest.Destination = { _, _ in
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = documentsURL.appendingPathComponent(url.lastPathComponent)
+
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
+
+        AF.download(url, to: destination).response { response in
+            print(response)
+            completionHandler(response.fileURL, nil)
+        }
+//        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+//        AF.download(urlString, to: destination).response {
+//            print($0.error)
+//            completionHandler($0.fileURL, nil)
+//        }
+    }
 }

@@ -8,7 +8,7 @@ import UIKit
 class TrackCell: UITableViewCell {
     static let cellIdentifier = "TrackCell"
 
-    @IBOutlet weak var artworkImageView: NetworkUIImageView!
+    @IBOutlet weak var artworkImageView: CustomUIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!

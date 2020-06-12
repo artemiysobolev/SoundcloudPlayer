@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
@@ -15,12 +14,12 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O1b-PH-oRk">
-                    <rect key="frame" x="0.0" y="44" width="375" height="65"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="JqP-gs-ym7">
                             <rect key="frame" x="15" y="5" width="340" height="55"/>
                             <subviews>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFv-j9-7uq" customClass="NetworkUIImageView" customModule="Cloud_Music" customModuleProvider="target">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jFv-j9-7uq" customClass="CustomUIImageView" customModule="Cloud_Music" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="jFv-j9-7uq" secondAttribute="height" multiplier="1:1" id="ZY2-cZ-hES"/>
@@ -76,7 +75,7 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="mSe-2v-VLg">
-                    <rect key="frame" x="20" y="54" width="335" height="684"/>
+                    <rect key="frame" x="20" y="10" width="335" height="762"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulx-Db-Ks8">
                             <rect key="frame" x="0.0" y="0.0" width="335" height="30"/>
@@ -91,7 +90,7 @@
                                 <action selector="dragDownButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="3vo-OF-qfm"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zsn-fb-gYA" customClass="NetworkUIImageView" customModule="Cloud_Music" customModuleProvider="target">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zsn-fb-gYA" customClass="CustomUIImageView" customModule="Cloud_Music" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="45" width="335" height="335"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="zsn-fb-gYA" secondAttribute="height" multiplier="1:1" id="Qb9-O4-bAl"/>
@@ -113,13 +112,13 @@
                                     <rect key="frame" x="0.0" y="12" width="335" height="18"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McT-4c-tlZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="18"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="167.5" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--:--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hgg-xr-gxo">
-                                            <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="18"/>
+                                            <rect key="frame" x="167.5" y="0.0" width="167.5" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -134,10 +133,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7bC-FW-YbR">
-                            <rect key="frame" x="0.0" y="484.99999999999994" width="335" height="161.33333333333331"/>
+                            <rect key="frame" x="0.0" y="485" width="335" height="239"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZW-si-oXj">
-                                    <rect key="frame" x="0.0" y="70.666666666666629" width="111.66666666666667" height="20"/>
+                                    <rect key="frame" x="0.0" y="109.5" width="111.5" height="20"/>
                                     <color key="tintColor" name="SoundcloudOrange"/>
                                     <state key="normal" image="backward.fill" catalog="system">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
@@ -147,7 +146,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjO-un-QcC">
-                                    <rect key="frame" x="111.66666666666666" y="60.666666666666629" width="111.66666666666666" height="40.333333333333343"/>
+                                    <rect key="frame" x="111.5" y="99.5" width="112" height="40.5"/>
                                     <color key="tintColor" name="SoundcloudOrange"/>
                                     <state key="normal" image="pause.fill" catalog="system">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35" scale="large"/>
@@ -157,7 +156,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRR-pA-9qJ">
-                                    <rect key="frame" x="223.33333333333334" y="70.666666666666629" width="111.66666666666666" height="20"/>
+                                    <rect key="frame" x="223.5" y="109.5" width="111.5" height="20"/>
                                     <color key="tintColor" name="SoundcloudOrange"/>
                                     <state key="normal" image="forward.fill" catalog="system">
                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="20"/>
@@ -169,10 +168,10 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6Uo-7w-k5f">
-                            <rect key="frame" x="0.0" y="661.33333333333337" width="335" height="22.666666666666629"/>
+                            <rect key="frame" x="0.0" y="739" width="335" height="23"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JWZ-vF-pzq">
-                                    <rect key="frame" x="0.0" y="0.0" width="22.666666666666668" height="22.666666666666668"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="23" height="23"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="JWZ-vF-pzq" secondAttribute="height" id="7ag-oP-J5H"/>
                                     </constraints>
@@ -190,24 +189,24 @@
                                     </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Hrp-T5-kiX">
-                                    <rect key="frame" x="32.666666666666657" y="0.0" width="302.33333333333337" height="22.666666666666668"/>
+                                    <rect key="frame" x="33" y="0.0" width="302" height="23"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="xKC-2W-zSU">
-                                            <rect key="frame" x="0.0" y="1.6666666666666643" width="22.666666666666668" height="19.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="1" width="23" height="20.5"/>
                                             <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="xKC-2W-zSU" secondAttribute="height" multiplier="1:1" id="IS0-k7-9wA"/>
                                             </constraints>
                                         </imageView>
                                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="1qQ-Wf-S2l">
-                                            <rect key="frame" x="30.666666666666657" y="0.0" width="240.99999999999997" height="23.666666666666668"/>
+                                            <rect key="frame" x="31" y="0.0" width="240" height="24"/>
                                             <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
                                                 <action selector="volumeSliderValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="1ay-4A-Ox0"/>
                                             </connections>
                                         </slider>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker.3.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GMy-cW-bZx">
-                                            <rect key="frame" x="279.66666666666663" y="0.66666666666666607" width="22.666666666666686" height="21.333333333333336"/>
+                                            <rect key="frame" x="279" y="0.5" width="23" height="22"/>
                                             <color key="tintColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="GMy-cW-bZx" secondAttribute="height" multiplier="1:1" id="NYZ-bD-ybg"/>

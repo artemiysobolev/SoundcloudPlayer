@@ -11,11 +11,11 @@ class PlayerView: UIView {
     @IBOutlet weak var minimizedPlayerView: UIView!
     @IBOutlet weak var minimizedPlayButton: UIButton!
     @IBOutlet weak var minimizedNextButton: UIButton!
-    @IBOutlet weak var minimizedArtworkImageView: NetworkUIImageView!
+    @IBOutlet weak var minimizedArtworkImageView: CustomUIImageView!
     @IBOutlet weak var minimizedTitleLabel: UILabel!
     
     @IBOutlet weak var fullScreenPlayerStackView: UIStackView!
-    @IBOutlet weak var artworkImageView: NetworkUIImageView!
+    @IBOutlet weak var artworkImageView: CustomUIImageView!
     @IBOutlet weak var durationProgressView: UIProgressView!
     @IBOutlet weak var currentDurationLabel: UILabel!
     @IBOutlet weak var remainingDurationLabel: UILabel!
