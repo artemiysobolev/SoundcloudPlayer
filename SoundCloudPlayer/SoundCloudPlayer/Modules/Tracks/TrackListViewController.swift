@@ -14,12 +14,16 @@ class TrackListViewController: UIViewController {
 
     var trackList: [TrackViewData] = []
     var presenter: TrackListPresenterProtocol?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = true
         configureSearchController()
         configureTableView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         presenter?.getTrackList()
     }
     

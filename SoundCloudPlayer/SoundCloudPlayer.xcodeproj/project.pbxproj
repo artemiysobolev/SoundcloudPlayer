@@ -203,6 +203,7 @@
 				BA93EDEC24812C0C008CC905 /* Player */,
 				BA01818B247D72FB007AFB9F /* Tracks */,
 				BA968CCA2475B7680029C718 /* Login */,
+				BA2419C82492AF4A000B8BAA /* MainViewController.swift */,
 				BAF509F424795B05001B87CA /* Main.storyboard */,
 			);
 			path = Modules;
@@ -211,7 +212,6 @@
 		BA968CCA2475B7680029C718 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				BA2419C82492AF4A000B8BAA /* MainViewController.swift */,
 				BA968CB72475AB050029C718 /* LoginView.swift */,
 				BA968CCB2475D40C0029C718 /* LoginProtocols.swift */,
 				BA968CCD2475DB920029C718 /* LoginPresenter.swift */,

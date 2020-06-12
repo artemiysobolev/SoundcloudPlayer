@@ -28,11 +28,23 @@ class TrackCell: UITableViewCell {
         if let genre = track.genre {
             genreLabel.text = genre
         }
+        switch track.cacheStatus {
+        case .cached:
+            cacheButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            cacheButton.isEnabled = false
+        case .notCached:
+            cacheButton.setImage(UIImage(systemName: "plus"), for: .normal)
+            cacheButton.isEnabled = true
+        case .inCachedLibrary:
+            cacheButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+            cacheButton.isEnabled = true
+        }
         titleLabel.text = track.title
         durationLabel.text = track.duration
     }
     
     @IBAction func cacheButtonTapped(_ sender: UIButton) {
+        cacheButton.isEnabled = false
         tapAction?()
     }
 }

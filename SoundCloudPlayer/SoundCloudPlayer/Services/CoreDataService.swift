@@ -62,7 +62,26 @@ class CoreDataService {
         }
         return trackList
     }
-        
+
+    func isTrackCached(with id: Int) -> Bool {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CachedTrack")
+        fetchRequest.predicate = NSPredicate(format: "id == %d", Int64(id))
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["id"]
+        do {
+            let track = try context.fetch(fetchRequest)
+            return !track.isEmpty
+        } catch {
+            print(error.localizedDescription)
+            return false
+        }
+    }
+    
+    func removeTrack(_ track: CachedTrack) {
+        context.delete(track)
+        saveContext()
+    }
+    
     func saveContext () {
         if context.hasChanges {
             do {

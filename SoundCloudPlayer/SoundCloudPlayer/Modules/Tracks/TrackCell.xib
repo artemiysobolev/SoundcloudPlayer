@@ -67,7 +67,7 @@
                                     <constraint firstAttribute="trailing" secondItem="KqL-ed-bGJ" secondAttribute="trailing" id="dd5-tq-nrZ"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXl-Sz-pCe">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXl-Sz-pCe">
                                 <rect key="frame" x="369" y="0.0" width="30" height="55"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="Nyr-Op-VAc"/>

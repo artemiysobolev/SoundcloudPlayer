@@ -39,7 +39,9 @@ class MainViewController: UITabBarController {
         presenter.tabBarDelegate = self
         
         view.tabBarItem.image = UIImage(systemName: "square.and.arrow.down.fill")
-        view.tabBarItem.title = "Cached Library"
+        let title = "Cached Library"
+        view.tabBarItem.title = title
+        view.navigationItem.title = title
         
         return navVC
     }
@@ -60,7 +62,9 @@ class MainViewController: UITabBarController {
         presenter.tabBarDelegate = self
         
         view.tabBarItem.image = UIImage(systemName: "music.note.list")
-        view.tabBarItem.title = "Track List"
+        let title = "Track List"
+        view.tabBarItem.title = title
+        view.navigationItem.title = title
         
         return navVC
      }

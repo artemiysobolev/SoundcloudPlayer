@@ -19,7 +19,8 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
             return  TrackViewData(title: track.title ?? "",
                                   genre: track.genre,
                                   duration: Int(track.duration).convertMillisecondsDurationToString(),
-                                  artworkUrl: track.artworkImagePath?.absoluteString)
+                                  artworkUrl: track.artworkImagePath?.absoluteString,
+                                  cacheStatus: .inCachedLibrary)
         }
         view?.setTrackList(trackList: tracksForView)
     }
@@ -40,6 +41,10 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
         tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
     }
     
-    func cellButtonTapped(at index: Int) {}
+    func cellButtonTapped(at index: Int) {
+        let track = trackList[index]
+        coreDataService.removeTrack(track)
+        getTrackList()
+    }
     
 }

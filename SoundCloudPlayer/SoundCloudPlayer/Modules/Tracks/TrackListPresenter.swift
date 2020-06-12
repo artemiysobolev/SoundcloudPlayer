@@ -20,10 +20,13 @@ class TrackListPresenter {
     
     private func convertTrackListForView(_ trackList: [Track]) -> [TrackViewData] {
         let tracksForView = trackList.map({ track -> TrackViewData in
+            let isCached = coreDataService.isTrackCached(with: track.id)
+            let cachedStatus: TrackCacheStatus = isCached ? .cached : .notCached
             return TrackViewData(title: track.title,
                                  genre: track.genre,
                                  duration: track.duration.convertMillisecondsDurationToString(),
-                                 artworkUrl: track.artworkUrl)
+                                 artworkUrl: track.artworkUrl,
+                                 cacheStatus: cachedStatus)
         })
         return tracksForView
     }
