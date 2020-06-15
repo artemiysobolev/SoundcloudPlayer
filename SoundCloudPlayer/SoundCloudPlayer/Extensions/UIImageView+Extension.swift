@@ -14,7 +14,8 @@ class CustomUIImageView: UIImageView {
     
     func loadImageUsingUrlString(urlString: String) {
         image = nil
-        if let url = URL(string: urlString), url.isFileURL {
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        if let url = URL(string: urlString, relativeTo: documents), url.isFileURL {
             loadImageFromDevice(with: url.path)
         } else {
             loadImageFromNetwork(with: urlString)

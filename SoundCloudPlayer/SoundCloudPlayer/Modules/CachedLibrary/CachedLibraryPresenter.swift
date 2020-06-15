@@ -19,7 +19,7 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
             return  TrackViewData(title: track.title ?? "",
                                   genre: track.genre,
                                   duration: Int(track.duration).convertMillisecondsDurationToString(),
-                                  artworkUrl: track.artworkImagePath?.absoluteString,
+                                  artworkUrl: track.artworkImagePath,
                                   cacheStatus: .inCachedLibrary)
         }
         view?.setTrackList(trackList: tracksForView)
@@ -35,8 +35,8 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
                          title: track.title ?? "",
                          genre: track.genre,
                          duration: Int(track.duration),
-                         artworkUrl: track.artworkImagePath?.absoluteString,
-                         streamUrl: track.audioFilePath?.absoluteString)
+                         artworkUrl: track.artworkImagePath,
+                         streamUrl: track.audioFilePath)
         }
         tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
     }

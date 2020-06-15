@@ -24,7 +24,9 @@ class TrackListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.getTrackList()
+        if searchBarIsEmpty {
+            presenter?.getTrackList()
+        }
     }
     
     private func configureTableView() {

@@ -9,6 +9,7 @@ import CoreData
 class CoreDataService {
     
     static let shared = CoreDataService()
+    private let cachedTrack = "CachedTrack"
     private init() {}
     
     var context: NSManagedObjectContext {
@@ -25,8 +26,8 @@ class CoreDataService {
         return container
     }()
     
-    func saveTrackToDevice(_ track: Track, artworkImagePath: URL?, audioFilePath: URL?) {
-        guard let entity = NSEntityDescription.entity(forEntityName: "CachedTrack", in: context),
+    func saveTrackToDevice(_ track: Track, artworkImagePath: String?, audioFilePath: String?) {
+        guard let entity = NSEntityDescription.entity(forEntityName: cachedTrack, in: context),
             let trackObject = NSManagedObject(entity: entity, insertInto: context) as? CachedTrack else { return }
         
         if let imagePath = artworkImagePath {
@@ -36,7 +37,7 @@ class CoreDataService {
         if let audioPath = audioFilePath {
             trackObject.audioFilePath = audioPath
         } else {
-            trackObject.audioFilePath = URL(string: track.streamUrl!)
+            trackObject.audioFilePath = track.streamUrl
         }
         
         if let genre = track.genre {
@@ -64,32 +65,41 @@ class CoreDataService {
     }
 
     func isTrackCached(with id: Int) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "CachedTrack")
-        fetchRequest.predicate = NSPredicate(format: "id == %d", Int64(id))
-        fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["id"]
-        do {
-            let track = try context.fetch(fetchRequest)
-            return !track.isEmpty
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
+        return countRequest(predicate: NSPredicate(format: "id == %d", id)) == 0 ? false : true
     }
     
     func removeTrack(_ track: CachedTrack) {
-        if let path = track.artworkImagePath {
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        if let relativePath = track.artworkImagePath,
+            let url = URL(string: relativePath, relativeTo: documents),
+            countRequest(predicate: NSPredicate(format: "artworkImagePath == %@", relativePath)) == 1 {
             do {
-                try FileManager.default.removeItem(at: path)
+                try FileManager.default.removeItem(atPath: url.path)
             } catch {
                 print(error.localizedDescription)
             }
+        } else {
+            print("Image using by another track")
         }
         context.delete(track)
         saveContext()
     }
     
-    func saveContext () {
+    private func countRequest(predicate: NSPredicate) -> Int {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cachedTrack)
+        fetchRequest.predicate = predicate
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["id"]
+        do {
+            let result = try context.fetch(fetchRequest)
+            return result.count
+        } catch {
+            print(error.localizedDescription)
+            return 0
+        }
+    }
+    
+    private func saveContext () {
         if context.hasChanges {
             do {
                 try context.save()

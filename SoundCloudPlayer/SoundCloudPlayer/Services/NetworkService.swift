@@ -6,6 +6,11 @@
 import Foundation
 import Alamofire
 
+enum Folders: String {
+    case images
+    case audio
+}
+
 class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceProtocol {
     
     static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool) -> Void) {
@@ -102,24 +107,19 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
             }
         }
     }
-    
-    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(URL?, URL?) -> Void) {
+        
+    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(String?, String?) -> Void) {
         guard let url = URL(string: urlString) else { return }
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let relativePath = Folders.images.rawValue + "/" + url.lastPathComponent
+        
         let destination: DownloadRequest.Destination = { _, _ in
-            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let fileURL = documentsURL.appendingPathComponent(url.lastPathComponent)
-
-            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+            return (URL(fileURLWithPath: relativePath, relativeTo: documents), [.removePreviousFile, .createIntermediateDirectories])
         }
 
-        AF.download(url, to: destination).response { response in
-            print(response)
-            completionHandler(response.fileURL, nil)
+        AF.download(url, to: destination).response { _ in
+            completionHandler(relativePath, nil)
         }
-//        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
-//        AF.download(urlString, to: destination).response {
-//            print($0.error)
-//            completionHandler($0.fileURL, nil)
-//        }
+
     }
 }

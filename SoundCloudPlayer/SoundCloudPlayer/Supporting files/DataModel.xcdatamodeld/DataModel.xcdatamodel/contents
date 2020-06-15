@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E266" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CachedTrack" representedClassName="CachedTrack" syncable="YES" codeGenerationType="class">
-        <attribute name="artworkImagePath" optional="YES" attributeType="URI"/>
-        <attribute name="audioFilePath" attributeType="URI"/>
+        <attribute name="artworkImagePath" optional="YES" attributeType="String"/>
+        <attribute name="audioFilePath" attributeType="String"/>
         <attribute name="duration" attributeType="Integer 64" minValueString="0" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="genre" optional="YES" attributeType="String"/>
         <attribute name="id" attributeType="Integer 64" minValueString="0" usesScalarValueType="YES"/>
