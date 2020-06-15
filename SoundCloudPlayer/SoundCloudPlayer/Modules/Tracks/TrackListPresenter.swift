@@ -77,9 +77,9 @@ extension TrackListPresenter: TrackListPresenterProtocol {
     func cellButtonTapped(at index: Int) {
         guard let track = currentTrackList?[index] else { return }
         if let artworkUrl = track.largeArtworkUrl {
-            networkService?.downloadFileToDevice(from: artworkUrl, token: token, completionHandler: { [weak self] artworkPath, audiofilePath in
+            networkService?.downloadFileToDevice(from: artworkUrl, token: token, completionHandler: { [weak self] artworkPath in
                 guard let self = self else { return }
-                self.coreDataService.saveTrackToDevice(track, artworkImagePath: artworkPath, audioFilePath: audiofilePath)
+                self.coreDataService.saveTrackToDevice(track, artworkImagePath: artworkPath, audioFilePath: nil)
             })
         } else {
             coreDataService.saveTrackToDevice(track, artworkImagePath: nil, audioFilePath: nil)

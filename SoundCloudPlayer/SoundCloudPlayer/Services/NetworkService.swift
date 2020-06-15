@@ -108,7 +108,7 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
         }
     }
         
-    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(String?, String?) -> Void) {
+    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(String?) -> Void) {
         guard let url = URL(string: urlString) else { return }
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let relativePath = Folders.images.rawValue + "/" + url.lastPathComponent
@@ -117,8 +117,13 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
             return (URL(fileURLWithPath: relativePath, relativeTo: documents), [.removePreviousFile, .createIntermediateDirectories])
         }
 
-        AF.download(url, to: destination).response { _ in
-            completionHandler(relativePath, nil)
+        AF.download(url, to: destination).response { response in
+            switch response.result {
+            case .success:
+                completionHandler(relativePath)
+            case .failure:
+                completionHandler(nil)
+            }
         }
 
     }
