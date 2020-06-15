@@ -65,21 +65,12 @@ class CoreDataService {
     }
 
     func isTrackCached(with id: Int) -> Bool {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cachedTrackEntity)
-        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
-        fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["id"]
-        do {
-            let result = try context.fetch(fetchRequest)
-            return !result.isEmpty
-        } catch {
-            print(error.localizedDescription)
-            return false
-        }
+        return countRequest(predicate: NSPredicate(format: "id == %d", id)) == 0 ? false : true
     }
     
     func removeTrack(_ track: CachedTrack) {
-        if let relativePath = track.artworkImagePath {
+        if let relativePath = track.artworkImagePath,
+            countRequest(predicate: NSPredicate(format: "artworkImagePath == %@", relativePath)) == 1 {
             FileSystemService.removeFile(from: relativePath)
         }
         if let relativePath = track.audioFilePath {
@@ -87,6 +78,20 @@ class CoreDataService {
         }
         context.delete(track)
         saveContext()
+    }
+    
+    private func countRequest(predicate: NSPredicate) -> Int {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cachedTrackEntity)
+        fetchRequest.predicate = predicate
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["id"]
+        do {
+            let result = try context.fetch(fetchRequest)
+            return result.count
+        } catch {
+            print(error.localizedDescription)
+            return 0
+        }
     }
     
     private func saveContext () {
