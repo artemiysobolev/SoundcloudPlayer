@@ -9,7 +9,7 @@ import CoreData
 class CoreDataService {
     
     static let shared = CoreDataService()
-    private let cachedTrack = "CachedTrack"
+    private let cachedTrackEntity = "CachedTrack"
     private init() {}
     
     var context: NSManagedObjectContext {
@@ -27,7 +27,7 @@ class CoreDataService {
     }()
     
     func saveTrackToDevice(_ track: Track, artworkImagePath: String?, audioFilePath: String?) {
-        guard let entity = NSEntityDescription.entity(forEntityName: cachedTrack, in: context),
+        guard let entity = NSEntityDescription.entity(forEntityName: cachedTrackEntity, in: context),
             let trackObject = NSManagedObject(entity: entity, insertInto: context) as? CachedTrack else { return }
         
         if let imagePath = artworkImagePath {
@@ -65,38 +65,28 @@ class CoreDataService {
     }
 
     func isTrackCached(with id: Int) -> Bool {
-        return countRequest(predicate: NSPredicate(format: "id == %d", id)) == 0 ? false : true
-    }
-    
-    func removeTrack(_ track: CachedTrack) {
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        if let relativePath = track.artworkImagePath,
-            let url = URL(string: relativePath, relativeTo: documents),
-            countRequest(predicate: NSPredicate(format: "artworkImagePath == %@", relativePath)) == 1 {
-            do {
-                try FileManager.default.removeItem(atPath: url.path)
-            } catch {
-                print(error.localizedDescription)
-            }
-        } else {
-            print("Image using by another track")
-        }
-        context.delete(track)
-        saveContext()
-    }
-    
-    private func countRequest(predicate: NSPredicate) -> Int {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cachedTrack)
-        fetchRequest.predicate = predicate
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: cachedTrackEntity)
+        fetchRequest.predicate = NSPredicate(format: "id == %d", id)
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["id"]
         do {
             let result = try context.fetch(fetchRequest)
-            return result.count
+            return !result.isEmpty
         } catch {
             print(error.localizedDescription)
-            return 0
+            return false
         }
+    }
+    
+    func removeTrack(_ track: CachedTrack) {
+        if let relativePath = track.artworkImagePath {
+            FileSystemService.removeFile(from: relativePath)
+        }
+        if let relativePath = track.audioFilePath {
+            FileSystemService.removeFile(from: relativePath)
+        }
+        context.delete(track)
+        saveContext()
     }
     
     private func saveContext () {

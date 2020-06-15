@@ -8,15 +8,14 @@ import Security
 
 class KeychainService {
     
-    class func save(key: String, value: Data) -> OSStatus {
+    class func save(key: String, value: Data) {
         let query = [
             kSecClass as String: kSecClassGenericPassword as String,
             kSecAttrAccount as String: key,
             kSecValueData as String: value ] as [String: Any]
 
         SecItemDelete(query as CFDictionary)
-
-        return SecItemAdd(query as CFDictionary, nil)
+        SecItemAdd(query as CFDictionary, nil)
     }
 
     class func load(key: String) -> Data? {

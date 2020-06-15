@@ -7,7 +7,7 @@ import Foundation
 import AVKit
 
 class PlayerInteractor: PlayerDataStore {
-
+    
     var trackList: [Track]! {
         didSet {
             currentTrackIndex = 0
@@ -32,7 +32,7 @@ class PlayerInteractor: PlayerDataStore {
     var currentTrackIndex = 0
     var shuffledCurrentTrackIndex = 0
     var presenter: PlayerPresentationLogic?
-
+    
     private let player: AVPlayer = {
         let avPlayer = AVPlayer()
         avPlayer.automaticallyWaitsToMinimizeStalling = false
@@ -77,10 +77,17 @@ class PlayerInteractor: PlayerDataStore {
 extension PlayerInteractor: PlayerBusinessLogic {
     
     func setTrack(track: Track) {
-        guard let urlString = track.streamUrl,
-            let url = URL(string: urlString),
-            let headers = headers else { return }
-        let asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+        presenter?.presentDurationState(passed: 0, left: 0, ratio: 0)
+        var asset: AVURLAsset
+        
+        if let localUrl = URL(string: track.streamUrl, relativeTo: AppDirectories.documents.rawValue), localUrl.isFileURL {
+            asset = AVURLAsset(url: localUrl)
+        } else {
+            guard let url = URL(string: track.streamUrl),
+                let headers = headers else { return }
+            asset = AVURLAsset(url: url, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
+        }
+        
         let playerItem = AVPlayerItem(asset: asset)
         
         presenter?.presentTrack(track)

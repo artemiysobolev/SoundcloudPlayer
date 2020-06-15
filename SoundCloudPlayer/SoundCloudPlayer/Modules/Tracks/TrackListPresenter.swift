@@ -76,13 +76,14 @@ extension TrackListPresenter: TrackListPresenterProtocol {
     
     func cellButtonTapped(at index: Int) {
         guard let track = currentTrackList?[index] else { return }
-        if let artworkUrl = track.largeArtworkUrl {
-            networkService?.downloadFileToDevice(from: artworkUrl, token: token, completionHandler: { [weak self] artworkPath in
-                guard let self = self else { return }
-                self.coreDataService.saveTrackToDevice(track, artworkImagePath: artworkPath, audioFilePath: nil)
-            })
-        } else {
-            coreDataService.saveTrackToDevice(track, artworkImagePath: nil, audioFilePath: nil)
+        networkService?.downloadTrackToDevice(audioUrlString: track.streamUrl,
+                                              imageUrlString: track.largeArtworkUrl,
+                                              token: token,
+                                              id: track.id) { [weak self] audioPath, imagePath in
+                                                guard let self = self else { return }
+                                                DispatchQueue.main.async {
+                                                    self.coreDataService.saveTrackToDevice(track, artworkImagePath: imagePath, audioFilePath: audioPath)
+                                                }
         }
     }
 }

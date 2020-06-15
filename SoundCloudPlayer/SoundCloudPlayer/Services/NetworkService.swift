@@ -6,11 +6,6 @@
 import Foundation
 import Alamofire
 
-enum Folders: String {
-    case images
-    case audio
-}
-
 class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceProtocol {
     
     static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool) -> Void) {
@@ -107,17 +102,68 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
             }
         }
     }
+    
+    func downloadTrackToDevice(audioUrlString: String?,
+                               imageUrlString: String?,
+                               token: String,
+                               id: Int,
+                               completion: @escaping(_ audioPath: String?, _ imagePath: String?) -> Void) {
+        let downloadGroup = DispatchGroup()
+        var audioPath: String?
+        var imagePath: String?
+        if let audioUrlString = audioUrlString {
+            downloadGroup.enter()
+            downloadFile(from: audioUrlString,
+                         to: .audio,
+                         filename: String(id),
+                         headers: [HTTPHeader(name: "Authorization", value: "OAuth \(token)")]) { resultPath in
+                            audioPath = resultPath
+                            downloadGroup.leave()
+            }
+        }
+        if let imageUrlString = imageUrlString {
+            downloadGroup.enter()
+            downloadFile(from: imageUrlString, to: .images, filename: nil, headers: nil) { resultPath in
+                imagePath = resultPath
+                downloadGroup.leave()
+            }
+        }
+        downloadGroup.notify(queue: .main) {
+            guard audioPath != nil else {
+                if let imagePath = imagePath { FileSystemService.removeFile(from: imagePath) }
+                return
+            }
+            completion(audioPath, imagePath)
+        }
+    }
+    
+    private func downloadFile(from urlString: String,
+                              to directory: Folders,
+                              filename: String?,
+                              headers: HTTPHeaders?,
+                              completionHandler: @escaping(String?) -> Void) {
         
-    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(String?) -> Void) {
-        guard let url = URL(string: urlString) else { return }
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let relativePath = Folders.images.rawValue + "/" + url.lastPathComponent
+        guard let url = URL(string: urlString) else {
+            completionHandler(nil)
+            return
+        }
+        var urlRequest = URLRequest(url: url)
+        
+        urlRequest.headers = headers ?? HTTPHeaders()
+        var relativePath = directory.rawValue + "/" + (filename ?? url.lastPathComponent)
+        if directory == .audio {
+            relativePath.append(".mp3")
+        }
         
         let destination: DownloadRequest.Destination = { _, _ in
-            return (URL(fileURLWithPath: relativePath, relativeTo: documents), [.removePreviousFile, .createIntermediateDirectories])
+            return (URL(fileURLWithPath: relativePath, relativeTo: AppDirectories.documents.rawValue),
+                    [.removePreviousFile, .createIntermediateDirectories])
         }
-
-        AF.download(url, to: destination).response { response in
+        
+        AF.download(urlRequest, to: destination).downloadProgress { progress in
+            print(progress.fractionCompleted)
+        }.response { response in
+            print(response)
             switch response.result {
             case .success:
                 completionHandler(relativePath)
@@ -125,6 +171,6 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
                 completionHandler(nil)
             }
         }
-
     }
+    
 }

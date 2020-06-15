@@ -8,7 +8,11 @@ import UIKit
 protocol TrackListNetworkServiceProtocol: class {
     func getUserTrackList(token: String, complectionHandler: @escaping(Result<[Track], Error>) -> Void)
     func tracksSearchRequest(token: String, searchBody: String, completionHandler: @escaping(Result<[Track], Error>) -> Void)
-    func downloadFileToDevice(from urlString: String, token: String, completionHandler: @escaping(String?) -> Void)
+    func downloadTrackToDevice(audioUrlString: String?,
+                               imageUrlString: String?,
+                               token: String,
+                               id: Int,
+                               completion: @escaping(_ audioPath: String?, _ imagePath: String?) -> Void)
 }
 
 protocol TrackListViewProtocol: class {

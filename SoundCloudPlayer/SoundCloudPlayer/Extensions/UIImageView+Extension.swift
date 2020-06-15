@@ -14,17 +14,16 @@ class CustomUIImageView: UIImageView {
     
     func loadImageUsingUrlString(urlString: String) {
         image = nil
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        if let url = URL(string: urlString, relativeTo: documents), url.isFileURL {
-            loadImageFromDevice(with: url.path)
+        if let url = URL(string: urlString, relativeTo: AppDirectories.documents.rawValue), url.isFileURL {
+            loadImageFromDevice(with: url)
         } else {
             loadImageFromNetwork(with: urlString)
         }
         return
     }
     
-    private func loadImageFromDevice(with path: String) {
-        if let data = FileManager.default.contents(atPath: path) {
+    private func loadImageFromDevice(with url: URL) {
+        if let data = FileSystemService.readFile(from: url) {
             self.image = UIImage(data: data)
         } else {
             self.image = #imageLiteral(resourceName: "emptyArtwork")

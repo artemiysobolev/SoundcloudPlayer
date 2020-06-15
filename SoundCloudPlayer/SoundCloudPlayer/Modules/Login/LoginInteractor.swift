@@ -35,6 +35,6 @@ class LoginInteractor: LoginInteractorInputProtocol {
     
     private func saveAccessToken(token: String) {
         let tokenData: Data = token.data(using: .utf8)!
-        _ = KeychainService.save(key: SoundcloudAPIData.accessTokenKeychainName, value: tokenData)
+        KeychainService.save(key: SoundcloudAPIData.accessTokenKeychainName, value: tokenData)
     }
 }

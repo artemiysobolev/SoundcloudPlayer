@@ -30,6 +30,7 @@ class TrackListViewController: UIViewController {
     }
     
     private func configureTableView() {
+        tableView.contentInset.bottom = 65
         let cellNib = UINib(nibName: "TrackCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: TrackCell.cellIdentifier)
         tableView.delegate = self

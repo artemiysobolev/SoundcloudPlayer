@@ -11,7 +11,7 @@ protocol PlayerViewAppearanceDelegate: class {
 }
 
 class MainViewController: UITabBarController {
-
+    
     private var minimizedTopAnchorConstraint: NSLayoutConstraint!
     private var fullTopAnchorConstraint: NSLayoutConstraint!
     private var bottomAnchorConstraint: NSLayoutConstraint!
@@ -25,7 +25,7 @@ class MainViewController: UITabBarController {
         configurePlayerView()
         viewControllers = [trackListVC, cachedLibraryVC]
     }
-        
+    
     private func configureCachedLibraryModule() -> UIViewController {
         guard let navVC = UIStoryboard(name: "TrackList", bundle: nil).instantiateInitialViewController() as? UINavigationController,
             let view = navVC.viewControllers.first as? TrackListViewController else {
@@ -67,18 +67,18 @@ class MainViewController: UITabBarController {
         view.navigationItem.title = title
         
         return navVC
-     }
+    }
     
     private func configurePlayerView() {
         guard let playerView = playerView else { return }
         playerView.translatesAutoresizingMaskIntoConstraints = false
         playerView.router?.tabBarDelegate = self
         view.insertSubview(playerView, belowSubview: tabBar)
-
+        
         fullTopAnchorConstraint = playerView.topAnchor.constraint(equalTo: view.topAnchor, constant: view.frame.height)
         minimizedTopAnchorConstraint = playerView.topAnchor.constraint(equalTo: tabBar.topAnchor, constant: -65)
         bottomAnchorConstraint = playerView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.frame.height)
-
+        
         bottomAnchorConstraint.isActive = true
         fullTopAnchorConstraint.isActive = true
         
@@ -96,7 +96,7 @@ extension MainViewController: PlayerViewAppearanceDelegate {
         fullTopAnchorConstraint.isActive = true
         fullTopAnchorConstraint.constant = 0
         bottomAnchorConstraint.constant = 0
-
+        
         UIView.animate(withDuration: 0.5,
                        delay: 0,
                        usingSpringWithDamping: 0.7,
@@ -115,7 +115,7 @@ extension MainViewController: PlayerViewAppearanceDelegate {
         playerView?.interactor?.trackList = trackList
         playerView?.interactor?.setTrack(track: firstTrack)
     }
-
+    
     func minimizePlayerScreen() {
         fullTopAnchorConstraint.isActive = false
         bottomAnchorConstraint.constant = view.frame.height

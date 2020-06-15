@@ -36,7 +36,7 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
                          genre: track.genre,
                          duration: Int(track.duration),
                          artworkUrl: track.artworkImagePath,
-                         streamUrl: track.audioFilePath)
+                         streamUrl: track.audioFilePath ?? "")
         }
         tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
     }

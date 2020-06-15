@@ -17,7 +17,7 @@ struct Track: Decodable, Equatable {
     let genre: String?
     let duration: Int
     let artworkUrl: String?
-    let streamUrl: String?
+    let streamUrl: String
     
     var largeArtworkUrl: String? {
         return artworkUrl?.replacingOccurrences(of: "large", with: "crop")

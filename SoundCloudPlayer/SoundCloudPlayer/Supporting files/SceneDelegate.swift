@@ -14,20 +14,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        
-        //        Code for remove valid token
-//        _ = KeychainService.save(key: SoundcloudAPIData.accessTokenKeychainName, value: "lol".data(using: .utf8)!)
-        
         let token = String(data: KeychainService.load(key: SoundcloudAPIData.accessTokenKeychainName) ?? Data(), encoding: .utf8)
+
+        let presentMainVC = {
+            let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! MainViewController
+            mainVC.token = token
+            self.window?.rootViewController = mainVC
+            self.window?.makeKeyAndVisible()
+        }
+
+        guard InternetConnectionService.isConnectedToNetwork() else {
+            presentMainVC()
+            return
+        }
+        
         NetworkService.tokenValidationRequest(token: token) { [weak self] isValid in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if isValid {
-                    let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! MainViewController
-                    mainVC.token = token
-                    self.window?.rootViewController = mainVC
-                    self.window?.makeKeyAndVisible()
-                    return
+                    presentMainVC()
                 } else {
                     let loginModule = LoginRouter.createLoginModule()
                     self.window?.rootViewController = loginModule
