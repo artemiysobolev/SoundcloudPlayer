@@ -35,6 +35,10 @@ class TrackListPresenter {
 extension TrackListPresenter: TrackListPresenterProtocol {
     
     func searchTracks(withBody body: String) {
+        guard !body.isEmptyOrWhitespace() else {
+            getTrackList()
+            return
+        }
         networkService?.tracksSearchRequest(token: token, searchBody: body, completionHandler: { [weak self] result in
             guard let self = self else { return }
             var tracksForView: [TrackViewData] = []

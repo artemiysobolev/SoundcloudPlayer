@@ -15,18 +15,18 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
     
     func getTrackList() {
         trackList = coreDataService.fetchTracks()
-        let tracksForView = trackList.map { track -> TrackViewData in
-            return  TrackViewData(title: track.title ?? "",
-                                  genre: track.genre,
-                                  duration: Int(track.duration).convertMillisecondsDurationToString(),
-                                  artworkUrl: track.artworkImagePath,
-                                  cacheStatus: .inCachedLibrary)
-        }
-        view?.setTrackList(trackList: tracksForView)
+        view?.setTrackList(trackList: convertTrackListForView(trackList))
     }
     
     func searchTracks(withBody body: String) {
-        print("Search body: \(body)")
+        guard !body.isEmptyOrWhitespace() else {
+            view?.setTrackList(trackList: convertTrackListForView(trackList))
+            return
+        }
+        let filteredTrackList = trackList.filter { track -> Bool in
+            return track.title!.lowercased().contains(body.lowercased())
+        }
+        view?.setTrackList(trackList: convertTrackListForView(filteredTrackList))
     }
     
     func showPlayer(from trackIndex: Int) {
@@ -45,6 +45,17 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
         let track = trackList[index]
         coreDataService.removeTrack(track)
         getTrackList()
+    }
+    
+    private func convertTrackListForView(_ trackList: [CachedTrack]) -> [TrackViewData] {
+        let tracksForView = trackList.map { track -> TrackViewData in
+            return  TrackViewData(title: track.title ?? "",
+                                  genre: track.genre,
+                                  duration: Int(track.duration).convertMillisecondsDurationToString(),
+                                  artworkUrl: track.artworkImagePath,
+                                  cacheStatus: .inCachedLibrary)
+        }
+        return tracksForView
     }
     
 }
