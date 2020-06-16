@@ -115,10 +115,12 @@ extension PlayerInteractor: PlayerBusinessLogic {
     func changePlayingState() {
         if player.timeControlStatus == .paused {
             player.play()
+            setPlaybackProperties(elapsed: player.currentTime(), rate: 1)
             presenter?.presentPlayingState(isPlaying: true)
         } else {
             player.pause()
             presenter?.presentPlayingState(isPlaying: false)
+            setPlaybackProperties(elapsed: player.currentTime(), rate: 0)
         }
     }
     
