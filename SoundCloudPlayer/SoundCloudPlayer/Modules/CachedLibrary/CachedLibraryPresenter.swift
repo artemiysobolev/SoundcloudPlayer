@@ -26,6 +26,7 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
         let filteredTrackList = trackList.filter { track -> Bool in
             return track.title!.lowercased().contains(body.lowercased())
         }
+        trackList = filteredTrackList
         view?.setTrackList(trackList: convertTrackListForView(filteredTrackList))
     }
     
