@@ -5,6 +5,7 @@
 
 import Foundation
 import AVKit
+import MediaPlayer
 
 class PlayerInteractor: PlayerDataStore {
     
@@ -31,6 +32,7 @@ class PlayerInteractor: PlayerDataStore {
     }
     var currentTrackIndex = 0
     var shuffledCurrentTrackIndex = 0
+    var nowPlayingInfo: [String: Any] = [:]
     var presenter: PlayerPresentationLogic?
     
     private let player: AVPlayer = {
@@ -39,6 +41,10 @@ class PlayerInteractor: PlayerDataStore {
         return avPlayer
     }()
     private var headers: [String: String]!
+    
+    init() {
+        setupMediaPlayerCommandCenter()
+    }
     
     // MARK: - Private methods
     private func observeTrackDuration() {
@@ -91,9 +97,12 @@ extension PlayerInteractor: PlayerBusinessLogic {
         let playerItem = AVPlayerItem(asset: asset)
         
         presenter?.presentTrack(track)
+        setupMediaPlayerInfoCenter(with: track)
         checkNearbyTracks()
         
         observeTrackDuration()
+        observeTrackSeek(duration: Double(track.durationSeconds))
+        
         player.replaceCurrentItem(with: playerItem)
         player.play()
         presenter?.presentPlayingState(isPlaying: true)
@@ -151,13 +160,6 @@ extension PlayerInteractor: PlayerBusinessLogic {
         checkNearbyTracks()
     }
     
-    func changeTrackTimeState(with value: Float) {
-        guard let durationSeconds = player.currentItem?.duration else { return }
-        let seekTimeSeconds = Float64(value) * CMTimeGetSeconds(durationSeconds)
-        let seekTime = CMTimeMakeWithSeconds(seekTimeSeconds, preferredTimescale: 1)
-        player.seek(to: seekTime)
-    }
-    
     func changeShuffling() {
         
         if isShuffleActive {
@@ -176,4 +178,56 @@ extension PlayerInteractor: PlayerBusinessLogic {
         checkNearbyTracks()
     }
     
+}
+
+// MARK: - Work with system Media Player
+extension PlayerInteractor {
+    private func setupMediaPlayerCommandCenter() {
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        commandCenter.playCommand.addTarget { [unowned self] _ in
+            self.changePlayingState()
+            return .success
+        }
+        
+        commandCenter.pauseCommand.addTarget { [unowned self] _ in
+            self.changePlayingState()
+            return .success
+        }
+        
+        commandCenter.nextTrackCommand.addTarget { [unowned self] _ in
+            self.playNextTrack()
+            return .success
+        }
+        
+        commandCenter.previousTrackCommand.addTarget { [unowned self] _ in
+            self.playPreviuosTrack()
+            return .success
+        }
+    }
+    
+    private func setupMediaPlayerInfoCenter(with track: Track) {
+        nowPlayingInfo.removeAll()
+        
+        nowPlayingInfo[MPMediaItemPropertyTitle] = track.title
+        nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = track.durationSeconds
+        nowPlayingInfo[MPMediaItemPropertyArtist] = "Cloud Music"
+         
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = self.nowPlayingInfo
+    }
+    
+    private func setPlaybackProperties(elapsed: CMTime, rate: Float) {
+        nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = CMTimeGetSeconds(elapsed)
+        nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = rate
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = nowPlayingInfo
+    }
+    
+    private func observeTrackSeek(duration: Double) {
+        setPlaybackProperties(elapsed: player.currentTime(), rate: 0)
+        let time = CMTime(seconds: duration, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        player.seek(to: time, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero) { [weak self] _ in
+            guard let self = self else { return }
+            self.setPlaybackProperties(elapsed: self.player.currentTime(), rate: 1)
+        }
+    }
 }

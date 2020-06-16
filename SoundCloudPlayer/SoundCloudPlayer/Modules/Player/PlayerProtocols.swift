@@ -16,7 +16,6 @@ protocol PlayerDispayLogic: class {
 protocol PlayerBusinessLogic {
     func setTrack(track: Track)
     func changePlayingState()
-    func changeTrackTimeState(with value: Float)
     func changeShuffling()
     func changeVolume(with value: Float)
     func playPreviuosTrack()

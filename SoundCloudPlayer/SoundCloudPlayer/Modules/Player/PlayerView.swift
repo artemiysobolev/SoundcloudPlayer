@@ -31,8 +31,6 @@ class PlayerView: UIView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        remove thumb image and slider moving ability
-//        makeDurationSliderInactive()
         setupModule()
         setupGestures()
     }

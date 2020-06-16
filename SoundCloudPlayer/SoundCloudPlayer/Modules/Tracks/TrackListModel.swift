@@ -19,6 +19,9 @@ struct Track: Decodable, Equatable {
     let artworkUrl: String?
     let streamUrl: String
     
+    var durationSeconds: Int {
+        return duration / 1000
+    }
     var largeArtworkUrl: String? {
         return artworkUrl?.replacingOccurrences(of: "large", with: "crop")
     }
