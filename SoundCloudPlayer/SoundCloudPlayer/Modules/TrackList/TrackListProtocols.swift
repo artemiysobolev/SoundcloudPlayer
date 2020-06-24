@@ -26,6 +26,6 @@ protocol TrackListPresenterProtocol: class {
     var tabBarDelegate: PlayerViewAppearanceDelegate? { get set }
     func getTrackList()
     func searchTracks(withBody body: String)
-    func showPlayer(from trackIndex: Int)
-    func cellButtonTapped(at index: Int)
+    func showPlayer(fromTrackIndex trackIndex: Int)
+    func cellButtonTapped(index: Int)
 }

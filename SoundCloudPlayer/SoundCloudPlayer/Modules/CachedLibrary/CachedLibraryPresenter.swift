@@ -30,7 +30,7 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
         view?.setTrackList(trackList: convertTrackListForView(filteredTrackList))
     }
     
-    func showPlayer(from trackIndex: Int) {
+    func showPlayer(fromTrackIndex trackIndex: Int) {
         let tracksQueue = Array(trackList[trackIndex ..< trackList.count]).map { track -> Track in
             return Track(id: Int(track.id),
                          title: track.title ?? "",
@@ -42,7 +42,7 @@ class CachedLibraryPresenter: TrackListPresenterProtocol {
         tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
     }
     
-    func cellButtonTapped(at index: Int) {
+    func cellButtonTapped(index: Int) {
         let track = trackList[index]
         coreDataService.removeTrack(track)
         getTrackList()

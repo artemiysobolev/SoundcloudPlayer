@@ -60,14 +60,14 @@ extension TrackListViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.configureCell(with: trackList[indexPath.row])
         cell.tapAction = {
-            self.presenter?.cellButtonTapped(at: indexPath.row)
+            self.presenter?.cellButtonTapped(index: indexPath.row)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         searchController.searchBar.endEditing(true)
-        presenter?.showPlayer(from: indexPath.row)
+        presenter?.showPlayer(fromTrackIndex: indexPath.row)
     }
 }
 

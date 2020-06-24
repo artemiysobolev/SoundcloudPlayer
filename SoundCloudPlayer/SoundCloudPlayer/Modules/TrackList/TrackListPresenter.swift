@@ -55,7 +55,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         })
     }
     
-    func showPlayer(from trackIndex: Int) {
+    func showPlayer(fromTrackIndex trackIndex: Int) {
         guard let currentTrackList = currentTrackList else { return }
         let tracksQueue: [Track] = Array(currentTrackList[trackIndex ..< currentTrackList.count])
         tabBarDelegate?.presentFullPlayerScreen(tracksQueue: tracksQueue)
@@ -78,7 +78,7 @@ extension TrackListPresenter: TrackListPresenterProtocol {
         }
     }
     
-    func cellButtonTapped(at index: Int) {
+    func cellButtonTapped(index: Int) {
         guard let track = currentTrackList?[index] else { return }
         networkService?.downloadTrackToDevice(audioUrlString: track.streamUrl,
                                               imageUrlString: track.largeArtworkUrl,
