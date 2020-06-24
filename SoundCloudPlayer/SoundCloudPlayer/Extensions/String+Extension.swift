@@ -7,10 +7,9 @@ import Foundation
 
 extension String {
     func isEmptyOrWhitespace() -> Bool {
-
-        if self.isEmpty {
+        if isEmpty {
             return true
         }
-        return (self.trimmingCharacters(in: .whitespaces) == "")
+        return (trimmingCharacters(in: .whitespaces) == "")
     }
 }

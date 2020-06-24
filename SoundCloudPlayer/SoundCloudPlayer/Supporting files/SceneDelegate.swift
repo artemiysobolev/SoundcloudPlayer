@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let token = String(data: KeychainService.load(key: SoundcloudAPIData.accessTokenKeychainName) ?? Data(), encoding: .utf8)
+        let token = String(data: KeychainService.load(key: KeychainKeys.accessToken) ?? Data(), encoding: .utf8)
 
         let presentMainVC = {
             let mainVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! MainViewController

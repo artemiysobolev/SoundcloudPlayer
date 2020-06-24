@@ -3,7 +3,7 @@
 // 	SoundCloudPlayer
 //
 
-import UIKit
+import Foundation
 
 class LoginPresenter: LoginPresenterProtocol {
     weak var view: LoginViewProtocol?

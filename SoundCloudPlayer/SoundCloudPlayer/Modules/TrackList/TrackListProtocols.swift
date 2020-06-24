@@ -3,7 +3,7 @@
 // 	SoundCloudPlayer
 //
 
-import UIKit
+import Foundation
 
 protocol TrackListNetworkServiceProtocol: class {
     func getUserTrackList(token: String, complectionHandler: @escaping(Result<[Track], Error>) -> Void)

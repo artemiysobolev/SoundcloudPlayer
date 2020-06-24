@@ -24,9 +24,9 @@ class CustomUIImageView: UIImageView {
     
     private func loadImageFromDevice(with url: URL) {
         if let data = FileSystemService.readFile(from: url) {
-            self.image = UIImage(data: data)
+            image = UIImage(data: data)
         } else {
-            self.image = #imageLiteral(resourceName: "emptyArtwork")
+            image = #imageLiteral(resourceName: "emptyArtwork")
         }
         return
     }
@@ -36,7 +36,7 @@ class CustomUIImageView: UIImageView {
         image = nil
         
         if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
-            self.image = imageFromCache
+            image = imageFromCache
             return
         }
         

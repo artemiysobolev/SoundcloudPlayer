@@ -4,8 +4,6 @@
 //
 
 import UIKit
-import SafariServices
-import AuthenticationServices
 
 class LoginView: UIViewController {
     @IBOutlet weak var loginButton: UIButton!

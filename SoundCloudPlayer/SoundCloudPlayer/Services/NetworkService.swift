@@ -7,12 +7,44 @@ import Foundation
 import Alamofire
 
 class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceProtocol {
+    func sendOAuthRequest(email: String, password: String, completionHandler: @escaping (Result<String, NetworkError>) -> Void) {
+        
+        var httpBody: [String: Any] = [:]
+        httpBody["client_id"] = SoundcloudAPIData.clientID
+        httpBody["client_secret"] = SoundcloudAPIData.clientSecret
+        httpBody["grant_type"] = GrantType.password
+        httpBody["scope"] = SoundcloudAPIData.scope
+        httpBody["username"] = email
+        httpBody["password"] = password
+        
+        AF.request(SoundcloudAPIUrls.oAuth, method: .post, parameters: httpBody)
+            .validate(statusCode: [200])
+            .responseJSON { response in
+                
+                switch response.result {
+                case .success(let value):
+                    guard let jsonResponse = value as? [String: Any],
+                        let token = jsonResponse["access_token"] as? String else {
+                            completionHandler(.failure(NetworkError.undefinedError))
+                            return
+                    }
+                    completionHandler(.success(token))
+                case .failure(let error):
+                    if error.responseCode == 401 {
+                        completionHandler(.failure(NetworkError.wrongAuthData))
+                    } else {
+                        completionHandler(.failure(NetworkError.undefinedError))
+                    }
+                }
+        }
+    }
     
     static func tokenValidationRequest(token: String?, completionHandler: @escaping(Bool) -> Void) {
         guard let token = token else { return }
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
+        let urlString = SoundcloudAPIUrls.me
         
-        AF.request("\(SoundcloudAPIData.globalUrl)/me", method: .get, headers: [header])
+        AF.request(urlString, method: .get, headers: [header])
             .validate(statusCode: [200])
             .responseJSON { response in
                 
@@ -25,46 +57,10 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
         }
     }
     
-    func sendOAuthRequest(email: String,
-                          password: String,
-                          completionHandler: @escaping (_ token: String?, _ error: String?) -> Void) {
-        
-        var httpBody: [String: Any] = [:]
-        httpBody["client_id"] = SoundcloudAPIData.clientID
-        httpBody["client_secret"] = SoundcloudAPIData.clientSecret
-        httpBody["grant_type"] = GrantType.password
-        httpBody["redirect_uri"] = SoundcloudAPIData.redirectURI
-        httpBody["scope"] = SoundcloudAPIData.scope
-        httpBody["username"] = email
-        httpBody["password"] = password
-        
-        AF.request("\(SoundcloudAPIData.globalUrl)/oauth2/token", method: .post, parameters: httpBody)
-            .validate(statusCode: [200])
-            .responseJSON { response in
-                
-                switch response.result {
-                case .success(let value):
-                    guard let jsonResponse = value as? [String: Any],
-                        let token = jsonResponse["access_token"] as? String else {
-                            completionHandler(nil, "Incorrect response from server")
-                            return
-                    }
-                    completionHandler(token, nil)
-                case .failure(let error):
-                    if error.responseCode == 401 {
-                        completionHandler(nil, "Incorrect username or password")
-                    } else {
-                        completionHandler(nil, "Some undefined error")
-                    }
-                }
-        }
-    }
-    
     func getUserTrackList(token: String, complectionHandler: @escaping (Result<[Track], Error>) -> Void) {
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
-        let urlString = "\(SoundcloudAPIData.globalUrl)/me/tracks"
         
-        AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseData { response in
+        AF.request(SoundcloudAPIUrls.tracks, headers: [header]).validate(statusCode: [200]).responseData { response in
             switch response.result {
             case .success(let data):
                 do {
@@ -84,7 +80,7 @@ class NetworkService: LoginNetworkServiceInputProtocol, TrackListNetworkServiceP
     func tracksSearchRequest(token: String, searchBody: String, completionHandler: @escaping(Result<[Track], Error>) -> Void) {
         let header = HTTPHeader(name: "Authorization", value: "OAuth \(token)")
         guard let encodedBody = searchBody.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
-        let urlString = "\(SoundcloudAPIData.globalUrl)/tracks?limit=50&q=" + encodedBody
+        let urlString = SoundcloudAPIUrls.tracksSearch + encodedBody
         
         AF.request(urlString, headers: [header]).validate(statusCode: [200]).responseData { response in
             switch response.result {

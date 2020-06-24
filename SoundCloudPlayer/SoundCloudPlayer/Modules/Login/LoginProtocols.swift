@@ -4,7 +4,6 @@
 //
 
 import UIKit
-import Alamofire
 
 protocol LoginViewProtocol: class {
     var presenter: LoginPresenterProtocol? { get set }
@@ -46,5 +45,6 @@ protocol LoginInteractorOutputProtocol: class {
 
 protocol LoginNetworkServiceInputProtocol: class {
     // Interactor -> Network Service
-    func sendOAuthRequest(email: String, password: String, completionHandler: @escaping(String?, String?) -> Void)
+//    func sendOAuthRequest(email: String, password: String, completionHandler: @escaping(String?, String?) -> Void)
+    func sendOAuthRequest(email: String, password: String, completionHandler: @escaping(Result<String, NetworkError>) -> Void)
 }

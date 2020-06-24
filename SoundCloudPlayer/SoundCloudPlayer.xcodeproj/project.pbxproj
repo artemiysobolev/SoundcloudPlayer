@@ -41,7 +41,7 @@
 		BA968CD4247666F90029C718 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA968CD3247666F90029C718 /* NetworkService.swift */; };
 		BAB3A3522497A49C009C9619 /* FileSystemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB3A3512497A49C009C9619 /* FileSystemService.swift */; };
 		BAB3A3542497FA9A009C9619 /* InternetConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB3A3532497FA9A009C9619 /* InternetConnectionService.swift */; };
-		BAE6BF722476C03A0078925A /* SoundcloudAPIData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */; };
+		BAE6BF722476C03A0078925A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE6BF712476C03A0078925A /* Constants.swift */; };
 		BAF509F3247936C8001B87CA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF509F2247936C8001B87CA /* String+Extension.swift */; };
 		BAF509F524795B05001B87CA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BAF509F424795B05001B87CA /* Main.storyboard */; };
 		BAF509FA24796C75001B87CA /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF509F924796C75001B87CA /* KeychainService.swift */; };
@@ -86,7 +86,7 @@
 		BA968CD3247666F90029C718 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BAB3A3512497A49C009C9619 /* FileSystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystemService.swift; sourceTree = "<group>"; };
 		BAB3A3532497FA9A009C9619 /* InternetConnectionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnectionService.swift; sourceTree = "<group>"; };
-		BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundcloudAPIData.swift; sourceTree = "<group>"; };
+		BAE6BF712476C03A0078925A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BAF509F2247936C8001B87CA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		BAF509F424795B05001B87CA /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BAF509F924796C75001B87CA /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BA01818B247D72FB007AFB9F /* Tracks */ = {
+		BA01818B247D72FB007AFB9F /* TrackList */ = {
 			isa = PBXGroup;
 			children = (
 				BA2419C02492AEFB000B8BAA /* TrackCell.swift */,
@@ -132,7 +132,7 @@
 				BA2419C42492AF19000B8BAA /* TrackListViewController.swift */,
 				BA01818F247D774D007AFB9F /* TrackListModel.swift */,
 			);
-			path = Tracks;
+			path = TrackList;
 			sourceTree = "<group>";
 		};
 		BA2419B42492AE0C000B8BAA /* CachedLibrary */ = {
@@ -190,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				BA2419B72492AEAA000B8BAA /* DataModel.xcdatamodeld */,
-				BAE6BF712476C03A0078925A /* SoundcloudAPIData.swift */,
+				BAE6BF712476C03A0078925A /* Constants.swift */,
 				BA968CB32475AB050029C718 /* AppDelegate.swift */,
 				BA968CB52475AB050029C718 /* SceneDelegate.swift */,
 				BA968CBC2475AB070029C718 /* Assets.xcassets */,
@@ -205,7 +205,7 @@
 			children = (
 				BA2419B42492AE0C000B8BAA /* CachedLibrary */,
 				BA93EDEC24812C0C008CC905 /* Player */,
-				BA01818B247D72FB007AFB9F /* Tracks */,
+				BA01818B247D72FB007AFB9F /* TrackList */,
 				BA968CCA2475B7680029C718 /* Login */,
 				BA2419C82492AF4A000B8BAA /* MainViewController.swift */,
 				BAF509F424795B05001B87CA /* Main.storyboard */,
@@ -414,7 +414,7 @@
 				BA470060247EDAFB00CF73C1 /* UIImageView+Extension.swift in Sources */,
 				BA2419B92492AEAA000B8BAA /* DataModel.xcdatamodeld in Sources */,
 				BAF509F3247936C8001B87CA /* String+Extension.swift in Sources */,
-				BAE6BF722476C03A0078925A /* SoundcloudAPIData.swift in Sources */,
+				BAE6BF722476C03A0078925A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
